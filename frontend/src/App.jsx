@@ -13,7 +13,7 @@ function App() {
 	return (
 		<Provider store={store}>
 			<BrowserRouter>
-				<Header />
+				{/* <Header /> */}
 				<Suspense fallback={<div>loading...</div>}>
 					<Routes>
 						<Route path="/" element={<Dashboard />} />
@@ -22,7 +22,7 @@ function App() {
 						<Route path="*" element={<PageNotFound />} />
 					</Routes>
 				</Suspense>
-				<Footer />
+				{/* <Footer /> */}
 			</BrowserRouter>
 		</Provider>
 	);
