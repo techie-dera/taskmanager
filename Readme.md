@@ -25,3 +25,24 @@
 -   Users can update either their name, email, or password (with both old and new passwords) on the settings page.
 
 ---
+
+## Environment Variables
+
+-   backend/.env
+
+```bash
+
+MONGODB_URI=mongodb://127.0.0.1:27017/task_management
+FRONTEND_URL=http://localhost:5173
+PORT=9000
+JWT_SECRET=secret-kJKJllKKJJghLjOiUfcHGkMLgdJlLKDtrdyKLBJbRdesEkj
+
+```
+
+-   frontend/.env
+
+```bash
+
+VITE_BACKEND_URL=http://localhost:9000
+
+```
