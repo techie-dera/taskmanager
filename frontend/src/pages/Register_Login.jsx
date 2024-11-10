@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { checkValidSignUpFrom } from "../utils/validate";
+import { checkValidSignInFrom, checkValidSignUpFrom } from "../utils/validate";
 import { PiEye, PiEyeClosedLight } from "react-icons/pi";
 import {
 	CiLock,
@@ -99,6 +99,8 @@ const Register_Login = () => {
 				toast.dismiss();
 				if (json.token) {
 					setIsRegister(false);
+					setPassword("");
+					setCPassword("");
 					toast.success(json?.message);
 				} else {
 					toast.error(json?.message);
