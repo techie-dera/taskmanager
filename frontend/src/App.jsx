@@ -2,14 +2,14 @@ import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import SignUp from "./pages/SignUp";
-import SignIn from "./pages/SignIn";
 import { Provider } from "react-redux";
 import Dashboard from "./pages/Dashboard";
 import PageNotFound from "./pages/PageNotFound";
 import store from "./redux/store";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Register_Login from "./pages/Register_Login";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
 	return (
@@ -36,9 +36,15 @@ function App() {
 				/>
 				<Suspense fallback={<div>loading...</div>}>
 					<Routes>
-						<Route path="/" element={<Dashboard />} />
-						<Route path="/signin" element={<SignIn />} />
-						<Route path="/signup" element={<SignUp />} />
+						<Route
+							path="/"
+							element={
+								<PrivateRoute>
+									<Dashboard />
+								</PrivateRoute>
+							}
+						/>
+						<Route path="/login" element={<Register_Login />} />
 						<Route path="*" element={<PageNotFound />} />
 					</Routes>
 				</Suspense>
