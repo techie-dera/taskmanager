@@ -1,0 +1,10 @@
+.task-section {
+	padding: 20px;
+	border: 1px solid #ddd;
+	min-height: 100%;
+}
+
+.task-section h3 {
+	margin-bottom: 15px;
+	font-size: 1.5rem;
+}
