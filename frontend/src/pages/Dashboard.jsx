@@ -6,30 +6,30 @@ import Success from "./Success";
 import "../css/Dashboard.css";
 
 const Dashboard = () => {
-  return (
-    <div>
-      <Navbar />
+	return (
+		<div>
+			<Navbar />
 
-      <div className="dashboard-container">
-        <div className="column">
-          <h2>Backlog</h2>
-          <Backlog />
-        </div>
-        <div className="column">
-          <h2>To Do</h2>
-          <ToDo />
-        </div>
-        <div className="column">
-          <h2>In Progress</h2>
-          <InProgress />
-        </div>
-        <div className="column">
-          <h2>Success</h2>
-          <Success />
-        </div>
-      </div>
-    </div>
-  );
+			<div className="dashboard-container">
+				<div className="column">
+					<h4>Backlog</h4>
+					<Backlog />
+				</div>
+				<div className="column">
+					<h4>To Do</h4>
+					<ToDo />
+				</div>
+				<div className="column">
+					<h4>In Progress</h4>
+					<InProgress />
+				</div>
+				<div className="column">
+					<h4>Success</h4>
+					<Success />
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Dashboard;
