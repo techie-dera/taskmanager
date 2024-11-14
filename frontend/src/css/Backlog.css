@@ -1,42 +1,43 @@
 .backlog-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-height: 90vh; 
-  overflow-y: auto; 
-  padding-right: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	overflow-y: auto;
+	padding: 0px 12px;
+	height: 95%;
+	padding-bottom: 100px;
 }
 
 .backlog-container::-webkit-scrollbar {
-  width: 8px;
+	width: 8px;
 }
 
 .backlog-container::-webkit-scrollbar-thumb {
-  background-color: #afdee5; 
-  border-radius: 4px; 
+	background-color: #afdee5;
+	border-radius: 4px;
 }
 
 .backlog-container::-webkit-scrollbar-track {
-  background: #f1f1f1;
+	background: #f1f1f1;
 }
 
 .backlog-box {
-  background-color: white;
-  height: 200px;
-  width: 300px;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	background-color: white;
+	/* height: 200px; */
+	width: 100%;
+	padding: 16px;
+	border-radius: 8px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .backlog-box h3 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
+	margin: 0;
+	font-size: 18px;
+	font-weight: bold;
+	color: #333;
 }
 
 .backlog-box p {
-  margin: 8px 0 0;
-  color: #666;
+	margin: 8px 0 0;
+	color: #666;
 }
