@@ -7,6 +7,36 @@
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.priority-menu {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+.priority-menu > div {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	font-size: 9px;
+	gap: 5px;
+}
+.priority-menu .circle-box {
+	height: 10px;
+	width: 10px;
+	background-color: rgb(254, 111, 111);
+	border-radius: 50%;
+}
+.priority-menu .circle-name-box {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 20px;
+	width: 20px;
+	background-color: rgba(255, 202, 202, 0.408);
+	border-radius: 50%;
+}
+
 .backlog-box h3 {
 	margin: 0;
 	font-size: 18px;
@@ -14,7 +44,7 @@
 	color: #333;
 }
 
-.backlog-box p {
+.backlog-box > p {
 	margin: 8px 0 0;
 	color: #666;
 }
