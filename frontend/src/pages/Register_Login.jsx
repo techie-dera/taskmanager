@@ -3,20 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { checkValidSignInFrom, checkValidSignUpFrom } from "../utils/validate";
 import { PiEye, PiEyeClosedLight } from "react-icons/pi";
-import {
-	CiLock,
-	CiMail,
-	CiPassport1,
-	CiUser,
-	CiVoicemail,
-} from "react-icons/ci";
+import { CiLock, CiMail, CiUser } from "react-icons/ci";
 import { useDispatch } from "react-redux";
 import { addAuth } from "../redux/slices/authSlice";
 import AuthImage from "../assets/AuthImage.png";
 import "../css/Register_Login.css";
 
 const Register_Login = () => {
-	const [isRegister, setIsRegister] = useState(true);
+	const [isRegister, setIsRegister] = useState(false);
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");

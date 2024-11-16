@@ -4,35 +4,61 @@ import { GoDatabase } from "react-icons/go";
 import { IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
 import "../css/Dashboard.css";
 import "../css/Navbar.css";
+import { useDispatch, useSelector } from "react-redux";
+import { updateDashboardSection } from "../redux/slices/stateSlice";
 
 const Navbar = () => {
+	const dispatch = useDispatch();
+	const dashboardSection = useSelector(
+		(store) => store.state.dashboardSection
+	);
 	return (
 		<div className="navbar">
 			<div className="nav-logo">
-				{/* <PiCodesandboxLogoLight /> */}
 				<PiCodesandboxLogoDuotone fontSize={22} />
 				<span>Pro Manage</span>
 			</div>
 			<div className="nav-links">
 				<div>
-					<a href="#board" className="nav-link">
+					<span
+						onClick={() =>
+							dispatch(updateDashboardSection("board"))
+						}
+						className={`nav-link ${
+							dashboardSection == "board" && "nav-active"
+						}`}
+					>
 						<MdOutlineSpaceDashboard fontSize={22} />
 						<span>Board</span>
-					</a>
-					<a href="#analytics" className="nav-link">
+					</span>
+					<span
+						onClick={() =>
+							dispatch(updateDashboardSection("analytics"))
+						}
+						className={`nav-link ${
+							dashboardSection == "analytics" && "nav-active"
+						}`}
+					>
 						<GoDatabase fontSize={22} />
 						<span>Analytics</span>
-					</a>
-					<a href="#settings" className="nav-link">
+					</span>
+					<span
+						onClick={() =>
+							dispatch(updateDashboardSection("settings"))
+						}
+						className={`nav-link ${
+							dashboardSection == "settings" && "nav-active"
+						}`}
+					>
 						<IoSettingsOutline fontSize={22} />
 						<span>Settings</span>
-					</a>
+					</span>
 				</div>
 				<div className="nav-logout">
-					<a href="#logout" className="nav-log">
+					<span className="nav-log">
 						<IoLogOutOutline fontSize={22} />
 						<span>Log out</span>
-					</a>
+					</span>
 				</div>
 			</div>
 		</div>
