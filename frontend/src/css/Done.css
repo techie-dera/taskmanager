@@ -1,18 +1,18 @@
-.success-box {
+.done-box {
 	background-color: white;
 	padding: 16px;
 	border-radius: 20px;
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.success-box h3 {
+.done-box h3 {
 	margin: 0;
 	font-size: 18px;
 	font-weight: 500;
 	color: #333;
 }
 
-.success-box p {
+.done-box p {
 	margin: 8px 0 0;
 	color: #666;
 }
