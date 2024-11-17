@@ -1,11 +1,11 @@
 import TaskBox from "../components/TaskBox";
 
-const ToDo = () => {
+const ToDo = ({ todoCollapse }) => {
 	return (
 		<div className="task-container">
-			<TaskBox />
-			<TaskBox />
-			<TaskBox />
+			<TaskBox todoCollapse={todoCollapse} />
+			<TaskBox todoCollapse={todoCollapse} />
+			<TaskBox todoCollapse={todoCollapse} />
 		</div>
 	);
 };

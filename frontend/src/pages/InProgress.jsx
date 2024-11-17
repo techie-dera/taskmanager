@@ -1,11 +1,11 @@
 import TaskBox from "../components/TaskBox";
 
-const InProgress = () => {
+const InProgress = ({ progressCollapse }) => {
 	return (
 		<div className="task-container">
-			<TaskBox />
-			<TaskBox />
-			<TaskBox />
+			<TaskBox progressCollapse={progressCollapse} />
+			<TaskBox progressCollapse={progressCollapse} />
+			<TaskBox progressCollapse={progressCollapse} />
 		</div>
 	);
 };

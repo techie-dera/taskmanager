@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { TbDots } from "react-icons/tb";
 
-const TaskBox = () => {
+const TaskBox = ({
+	backlogCollapse,
+	todoCollapse,
+	progressCollapse,
+	doneCollapse,
+}) => {
 	const [collapse, setCollapse] = useState(true);
+	useEffect(() => {
+		setCollapse(true);
+	}, [backlogCollapse, todoCollapse, progressCollapse, doneCollapse]);
 	return (
 		<div className="task-box">
 			<div className="priority-menu">
