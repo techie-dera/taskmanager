@@ -60,6 +60,7 @@
 	gap: 15px;
 	width: fit-content;
 	color: red;
+	cursor: pointer;
 }
 .nav-log:hover {
 	color: rgb(123, 0, 0);
