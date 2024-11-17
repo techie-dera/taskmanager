@@ -2,7 +2,6 @@ import { PiCodesandboxLogoDuotone } from "react-icons/pi";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { GoDatabase } from "react-icons/go";
 import { IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
-import "../css/Dashboard.css";
 import "../css/Navbar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateDashboardSection } from "../redux/slices/stateSlice";

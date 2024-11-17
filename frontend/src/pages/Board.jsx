@@ -2,10 +2,11 @@ import React from "react";
 import Backlog from "./Backlog";
 import ToDo from "./ToDo";
 import InProgress from "./InProgress";
-import Success from "./Done";
+import Done from "./Done";
 import { VscCollapseAll } from "react-icons/vsc";
 import { AiOutlinePlus } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
+import "../css/Task.css";
 
 const Board = () => {
 	return (
@@ -51,7 +52,7 @@ const Board = () => {
 					<h4>
 						<span>Done</span> <VscCollapseAll fontSize={18} />
 					</h4>
-					<Success />
+					<Done />
 				</div>
 			</div>
 		</div>

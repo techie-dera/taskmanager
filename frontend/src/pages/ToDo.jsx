@@ -1,22 +1,13 @@
-import "../css/ToDo.css";
+import TaskBox from "../components/TaskBox";
 
 const ToDo = () => {
-  return (
-    <div className="ToDo-container">
-      <div className="ToDo-box">
-        <h3>High Probability</h3>
-        <p>Tasks with a high chance of being prioritized.</p>
-      </div>
-      <div className="ToDo-box">
-        <h3>Moderate Probability</h3>
-        <p>Tasks with a moderate chance of being prioritized.</p>
-      </div>
-      <div className="ToDo-box">
-        <h3>Low Probability</h3>
-        <p>Tasks with a lower chance of being prioritized.</p>
-      </div>
-    </div>
-  );
+	return (
+		<div className="task-container">
+			<TaskBox />
+			<TaskBox />
+			<TaskBox />
+		</div>
+	);
 };
 
 export default ToDo;
