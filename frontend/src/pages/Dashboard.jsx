@@ -4,7 +4,13 @@ import Analytics from "./Analytics";
 import Settings from "./Settings";
 import { useSelector } from "react-redux";
 import "../css/Dashboard.css";
-import { AddedPeople, AddPeople } from "../components/Model";
+import {
+	AddedPeople,
+	AddPeople,
+	Logout,
+	TaskCard,
+	TaskDelete,
+} from "../components/Model";
 
 const Dashboard = () => {
 	const state = useSelector((store) => store.state);
@@ -16,6 +22,9 @@ const Dashboard = () => {
 			{state.dashboardSection == "settings" && <Settings />}
 			{state.addPeopleM && <AddPeople />}
 			{state.addedPeopleM && <AddedPeople />}
+			{state.logoutM && <Logout />}
+			{state.taskDeleteM && <TaskDelete />}
+			{state.taskCardM && <TaskCard />}
 		</>
 	);
 };

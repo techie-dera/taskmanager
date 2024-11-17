@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Backlog from "./Backlog";
 import ToDo from "./ToDo";
 import InProgress from "./InProgress";
@@ -10,7 +10,12 @@ import "../css/Task.css";
 import { useDispatch, useSelector } from "react-redux";
 import { generateDate } from "../utils/generateDate";
 import { LuUsers2 } from "react-icons/lu";
-import { setAddPeopleM } from "../redux/slices/stateSlice";
+import {
+	setAddPeopleM,
+	setTaskCardM,
+	setTaskFilterP,
+} from "../redux/slices/stateSlice";
+import { TaskFilter } from "../components/PopUp";
 
 const Board = () => {
 	const [backlogCollapse, setBacklogCollapse] = useState(false);
@@ -18,7 +23,20 @@ const Board = () => {
 	const [progressCollapse, setProgressCollapse] = useState(false);
 	const [doneCollapse, setDoneCollapse] = useState(false);
 	const auth = useSelector((store) => store.auth);
+	const taskFilter = useSelector((store) => store.state.taskFilterP);
 	const dispatch = useDispatch();
+
+	const handleClickOutside = (event) => {
+		if (taskFilter && !event?.target.closest(".popup-box")) {
+			dispatch(setTaskFilterP(false));
+		}
+	};
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [taskFilter]);
 
 	return (
 		<div className="dashboard-container">
@@ -38,9 +56,12 @@ const Board = () => {
 							<span>Add People</span>
 						</span>
 					</div>
-					<span className="header-time">
-						<p>This week</p>
-						<IoIosArrowDown />
+					<span className="header-time relative">
+						<span onClick={() => dispatch(setTaskFilterP(true))}>
+							<p>This week</p>
+							<IoIosArrowDown />
+						</span>
+						{taskFilter && <TaskFilter />}
 					</span>
 				</div>
 			</div>
@@ -60,7 +81,11 @@ const Board = () => {
 					<h4>
 						<span>To Do</span>
 						<span>
-							<AiOutlinePlus fontSize={18} cursor={"pointer"} />
+							<AiOutlinePlus
+								fontSize={18}
+								cursor={"pointer"}
+								onClick={() => dispatch(setTaskCardM(true))}
+							/>
 							<VscCollapseAll
 								fontSize={18}
 								cursor={"pointer"}

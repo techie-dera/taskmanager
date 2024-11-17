@@ -4,7 +4,7 @@ import { GoDatabase } from "react-icons/go";
 import { IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
 import "../css/Navbar.css";
 import { useDispatch, useSelector } from "react-redux";
-import { updateDashboardSection } from "../redux/slices/stateSlice";
+import { setLogoutM, updateDashboardSection } from "../redux/slices/stateSlice";
 
 const Navbar = () => {
 	const dispatch = useDispatch();
@@ -12,11 +12,6 @@ const Navbar = () => {
 		(store) => store.state.dashboardSection
 	);
 
-	const handleLogout = () => {
-		localStorage.removeItem("token");
-		window.location.reload();
-		navigate("/login");
-	};
 	return (
 		<div className="navbar">
 			<div className="nav-logo">
@@ -60,7 +55,10 @@ const Navbar = () => {
 					</span>
 				</div>
 				<div className="nav-logout">
-					<span className="nav-log" onClick={() => handleLogout()}>
+					<span
+						className="nav-log"
+						onClick={() => dispatch(setLogoutM(true))}
+					>
 						<IoLogOutOutline fontSize={22} />
 						<span>Log out</span>
 					</span>
