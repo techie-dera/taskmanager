@@ -49,7 +49,7 @@ function App() {
 	}, [token, pathname]);
 
 	return (
-		<div>
+		<div className="app-container">
 			{loading && <Loading />}
 			<Suspense fallback={<Loading />}>
 				<Routes>
