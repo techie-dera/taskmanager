@@ -8,6 +8,7 @@ import Loading from "./components/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { addAuth } from "./redux/slices/authSlice";
 import { setLoading } from "./redux/slices/stateSlice";
+import { TaskCardPublic } from "./components/Model";
 
 function App() {
 	const dispatch = useDispatch();
@@ -43,8 +44,6 @@ function App() {
 	useEffect(() => {
 		if (token) {
 			getAuthUser(token);
-		} else {
-			navigate("/login");
 		}
 	}, [token, pathname]);
 
@@ -62,6 +61,7 @@ function App() {
 						}
 					/>
 					<Route path="/login" element={<Register_Login />} />
+					<Route path="/task/:id" element={<TaskCardPublic />} />
 					<Route path="*" element={<PageNotFound />} />
 				</Routes>
 			</Suspense>
