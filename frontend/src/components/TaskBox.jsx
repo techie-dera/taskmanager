@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { TbDots } from "react-icons/tb";
+import { TaskMenu } from "./PopUp";
 
 const TaskBox = ({
 	backlogCollapse,
@@ -9,6 +10,20 @@ const TaskBox = ({
 	doneCollapse,
 }) => {
 	const [collapse, setCollapse] = useState(true);
+	const [taskMenuP, setTaskMenuP] = useState(false);
+
+	const handleClickOutside = (event) => {
+		if (taskMenuP && !event?.target.closest(".popup-box")) {
+			setTaskMenuP(false);
+		}
+	};
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [taskMenuP]);
+
 	useEffect(() => {
 		setCollapse(true);
 	}, [backlogCollapse, todoCollapse, progressCollapse, doneCollapse]);
@@ -20,7 +35,14 @@ const TaskBox = ({
 					<p>HIGH PRIORITY</p>
 					<div className="circle-name-box">AK</div>
 				</div>
-				<TbDots fontSize={18} />
+				<div className="relative">
+					<TbDots
+						fontSize={18}
+						cursor={"pointer"}
+						onClick={() => setTaskMenuP(true)}
+					/>
+					{taskMenuP && <TaskMenu setTaskMenuP={setTaskMenuP} />}
+				</div>
 			</div>
 			<h3>Hero Section</h3>
 			<div className="task-checklist">
