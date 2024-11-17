@@ -7,18 +7,22 @@ import { VscCollapseAll } from "react-icons/vsc";
 import { AiOutlinePlus } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
 import "../css/Task.css";
+import { useSelector } from "react-redux";
+import { generateDate } from "../utils/generateDate";
 
 const Board = () => {
 	const [backlogCollapse, setBacklogCollapse] = useState(false);
 	const [todoCollapse, setTodoCollapse] = useState(false);
 	const [progressCollapse, setProgressCollapse] = useState(false);
 	const [doneCollapse, setDoneCollapse] = useState(false);
+	const auth = useSelector((store) => store.auth);
+
 	return (
 		<div className="dashboard-container">
 			<div className="dashboard-header">
 				<div className="header-user">
-					<h3>Welcome! Kumar</h3>
-					<h4>12th Jan, 2024</h4>
+					<h3>Welcome! {auth.name.split(" ")[0]}</h3>
+					<h4>{generateDate()}</h4>
 				</div>
 				<div>
 					<h2>Board</h2>
