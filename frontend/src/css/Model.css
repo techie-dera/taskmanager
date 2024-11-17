@@ -23,6 +23,8 @@
 	align-items: start;
 	justify-content: center;
 	gap: 12px;
+	border: 1px solid #efefef;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.07);
 }
 
 .model-card {
@@ -166,6 +168,8 @@
 }
 .priority-box span {
 	text-wrap: nowrap;
+	font-size: 14px;
+	text-transform: uppercase;
 }
 .priority-box > div {
 	width: 100%;
@@ -214,6 +218,49 @@
 	margin: 16px 0;
 	width: fit-content;
 }
+
+/* Model public view */
+.nav-logo-public {
+	position: absolute;
+	top: 30px;
+	left: 20px;
+}
+.model-public {
+	background-color: #fff;
+}
+.model-due {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 16px;
+	font-size: 14px;
+	font-weight: 500;
+}
+.model-due > div {
+	padding: 8px 10px;
+	border-radius: 10px;
+	background: #cf3636;
+	color: white;
+}
+.priority-public span {
+	font-size: 10px;
+}
+.checklist-public {
+	margin: 10px 0 6px 0;
+}
+
+.checkbox-public > div {
+	height: 18px;
+	width: 18px;
+	position: absolute;
+	z-index: 100;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.checklist-box-public {
+	max-height: 40vh;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
 	.model-box {

@@ -10,6 +10,7 @@ import {
 } from "../redux/slices/stateSlice";
 import { AiFillDelete, AiOutlinePlus } from "react-icons/ai";
 import { CiLock } from "react-icons/ci";
+import { PiCodesandboxLogoDuotone } from "react-icons/pi";
 
 export const AddPeople = () => {
 	const dispatch = useDispatch();
@@ -115,6 +116,7 @@ export const TaskCard = () => {
 		e.preventDefault();
 		console.log(title);
 		console.log(priority);
+		console.log(dueDate.current?.value);
 	};
 	return (
 		<div className="model-container">
@@ -253,6 +255,65 @@ export const TaskCard = () => {
 					</button>
 				</div>
 			</form>
+		</div>
+	);
+};
+export const TaskCardPublic = () => {
+	return (
+		<div className="model-container model-public">
+			<div className="nav-logo nav-logo-public">
+				<PiCodesandboxLogoDuotone fontSize={22} />
+				<span>Pro Manage</span>
+			</div>
+			<div className="model-box model-card">
+				<div className="model-card-details">
+					<div className="priority-box priority-public">
+						<span
+							className="priority-circel"
+							style={{ background: "red" }}
+						></span>
+						<span>High Priority</span>
+					</div>
+					<h3>Hero Section</h3>
+					<div className="checklist-head checklist-public">
+						Checklist (0/0)
+					</div>
+					<div className="checklist-box checklist-box-public">
+						<div className="checklist-input-box">
+							<span className="checklist-btn checklist-btn-l checkbox-public">
+								<input type="checkbox" checked />
+								<div></div>
+							</span>
+							<p className="model-input model-input-btn">
+								Task to be done
+							</p>
+						</div>
+						<div className="checklist-input-box">
+							<span className="checklist-btn checklist-btn-l checkbox-public">
+								<input type="checkbox" />
+								<div></div>
+							</span>
+							<p className="model-input model-input-btn">
+								Task to be done
+							</p>
+						</div>
+						<div className="checklist-input-box">
+							<span className="checklist-btn checklist-btn-l checkbox-public">
+								<input type="checkbox" />
+								<div></div>
+							</span>
+							<p className="model-input model-input-btn">
+								Lorem ipsum, dolor sit amet consectetur
+								adipisicing elit.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div className="model-due">
+					<span>Due Date</span>
+					<div>Feb 10th</div>
+				</div>
+			</div>
 		</div>
 	);
 };
