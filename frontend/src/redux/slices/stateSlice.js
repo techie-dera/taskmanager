@@ -6,10 +6,11 @@ const stateSlice = createSlice({
 		dashboardSection: "board",
 		loading: false,
 		addPeopleM: false,
-		addedPeopleM: true,
+		addedPeopleM: false,
 		logoutM: false,
 		taskDeleteM: false,
 		taskCardM: false,
+		taskFilterP: false,
 	},
 	reducers: {
 		updateDashboardSection: (state, action) => {
@@ -33,6 +34,9 @@ const stateSlice = createSlice({
 		setTaskCardM: (state, action) => {
 			state.taskCardM = action.payload;
 		},
+		setTaskFilterP: (state, action) => {
+			state.taskFilterP = action.payload;
+		},
 	},
 });
 export const {
@@ -43,5 +47,6 @@ export const {
 	setLogoutM,
 	setTaskDeleteM,
 	setTaskCardM,
+	setTaskFilterP,
 } = stateSlice.actions;
 export default stateSlice.reducer;
