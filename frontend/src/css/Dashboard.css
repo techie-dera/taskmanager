@@ -51,7 +51,7 @@
 	opacity: 0.7;
 }
 
-.dashboard-header .header-time {
+.dashboard-header .header-time span {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -65,7 +65,6 @@
 	overflow-x: auto;
 	height: 100vh;
 	padding-bottom: 16px;
-	/* gap: 16px; */
 	width: 100%;
 }
 
@@ -74,7 +73,6 @@
 	background-color: #f5f5f5;
 	border-radius: 8px;
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-	/* scroll-snap-align: start; */
 	overflow-y: hidden;
 	height: 100%;
 	background: #eef2f5;

@@ -24,6 +24,9 @@
 	justify-content: center;
 	gap: 12px;
 }
+.model-box-s {
+	width: fit-content;
+}
 .model-box h3 {
 	font-weight: 500;
 }
@@ -47,6 +50,9 @@
 	justify-content: space-between;
 	width: 100%;
 }
+.model-box-s .model-btns {
+	flex-direction: column;
+}
 
 .model-btns button {
 	width: 100%;
@@ -65,4 +71,9 @@
 	background: #17a2b8;
 	color: white;
 	border: 1px solid #17a2b8;
+}
+
+.model-due-date {
+	margin-right: 10px;
+	border: 1px solid #ccc;
 }
