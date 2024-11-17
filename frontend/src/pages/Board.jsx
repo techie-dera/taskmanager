@@ -3,7 +3,6 @@ import Backlog from "./Backlog";
 import ToDo from "./ToDo";
 import InProgress from "./InProgress";
 import Success from "./Done";
-import "../css/Dashboard.css";
 import { VscCollapseAll } from "react-icons/vsc";
 import { AiOutlinePlus } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";

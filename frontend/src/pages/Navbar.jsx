@@ -12,6 +12,12 @@ const Navbar = () => {
 	const dashboardSection = useSelector(
 		(store) => store.state.dashboardSection
 	);
+
+	const handleLogout = () => {
+		localStorage.removeItem("token");
+		window.location.reload();
+		navigate("/login");
+	};
 	return (
 		<div className="navbar">
 			<div className="nav-logo">
@@ -55,7 +61,7 @@ const Navbar = () => {
 					</span>
 				</div>
 				<div className="nav-logout">
-					<span className="nav-log">
+					<span className="nav-log" onClick={() => handleLogout()}>
 						<IoLogOutOutline fontSize={22} />
 						<span>Log out</span>
 					</span>
