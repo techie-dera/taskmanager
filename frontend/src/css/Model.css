@@ -24,6 +24,17 @@
 	justify-content: center;
 	gap: 12px;
 }
+
+.model-card {
+	height: 70%;
+	justify-content: space-between;
+	font-size: 16px;
+}
+.model-card-details {
+	height: 100%;
+	width: 100%;
+}
+
 .model-box-s {
 	width: fit-content;
 }
@@ -36,6 +47,32 @@
 	width: 100%;
 	margin: 16px 0px;
 }
+
+.checklist-box {
+	width: 100%;
+	max-height: 26vh;
+	overflow-y: auto;
+	padding-right: 5px;
+}
+
+.checklist-box::-webkit-scrollbar {
+	width: 8px;
+}
+
+.checklist-box::-webkit-scrollbar-thumb {
+	background: #8daab9cc;
+	cursor: grab;
+	border-radius: 4px;
+}
+
+.checklist-box::-webkit-scrollbar-thumb:active {
+	cursor: grabbing;
+}
+
+.checklist-box::-webkit-scrollbar-track {
+	background: #d6eaf4;
+}
+
 .model-input {
 	width: 100%;
 	padding: 8px 10px;
@@ -43,6 +80,31 @@
 	border-radius: 5px;
 	outline: none;
 	font-size: 16px;
+	margin: 6px 0px;
+}
+.checklist-input-box {
+	position: relative;
+}
+.model-input-btn {
+	padding: 10px 30px;
+}
+.checklist-btn {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.checklist-input-box input[type="checkbox"] {
+	min-height: 15px;
+	min-width: 15px;
+	cursor: pointer;
+	accent-color: #17a2b8;
+}
+.checklist-btn-l {
+	left: 8px;
+}
+.checklist-btn-r {
+	right: 8px;
+	color: red;
 }
 .model-btns {
 	display: flex;
@@ -74,6 +136,87 @@
 }
 
 .model-due-date {
-	margin-right: 10px;
+	margin-right: 20px;
 	border: 1px solid #ccc;
+}
+
+.model-btns label {
+	cursor: pointer;
+	width: 100%;
+}
+
+#model-card-date {
+	height: 0px;
+	width: 0px;
+	opacity: 0;
+}
+.require {
+	color: red;
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+.priority-box {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 10px;
+	margin: 5px 0;
+	font-size: 14px;
+	margin: 12px 0;
+}
+.priority-box span {
+	text-wrap: nowrap;
+}
+.priority-box > div {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	gap: 5px;
+}
+.priority-box > div label {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	width: fit-content;
+	border: 1px solid #ccc;
+	padding: 2px 7px;
+	border-radius: 8px;
+	cursor: pointer;
+	text-wrap: nowrap;
+	background: #fff;
+}
+
+.priority-box input[type="radio"] {
+	display: none;
+}
+
+.priority-circel {
+	min-width: 7px;
+	min-height: 7px;
+	border-radius: 50%;
+}
+
+.selected-priority {
+	background: #dad8d8 !important;
+}
+.checklist-head {
+	font-size: 14px;
+}
+.checklist-add {
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	gap: 5px;
+	opacity: 0.8;
+	cursor: pointer;
+	margin: 16px 0;
+	width: fit-content;
+}
+/* Responsive */
+@media (max-width: 768px) {
+	.model-box {
+		min-width: 90%;
+	}
 }

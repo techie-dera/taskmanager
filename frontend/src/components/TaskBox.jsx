@@ -56,15 +56,15 @@ const TaskBox = ({
 					collapse && "task-checklist-details-collapse"
 				}`}
 			>
-				<label className="checklist-details-box" for="task1">
+				<label className="checklist-details-box" htmlFor="task1">
 					<input type="checkbox" id="task1" name="task1" />
 					<span>Task to be done</span>
 				</label>
-				<label className="checklist-details-box" for="task2">
+				<label className="checklist-details-box" htmlFor="task2">
 					<input type="checkbox" id="task2" name="task2" />
 					<span>Task to be done</span>
 				</label>
-				<label className="checklist-details-box" for="task3">
+				<label className="checklist-details-box" htmlFor="task3">
 					<input type="checkbox" id="task3" name="task3" />
 					<span>
 						Lorem ipsum dolor sit, amet consectetur adipisicing
