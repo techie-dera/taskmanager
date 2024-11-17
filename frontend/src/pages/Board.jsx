@@ -7,8 +7,10 @@ import { VscCollapseAll } from "react-icons/vsc";
 import { AiOutlinePlus } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
 import "../css/Task.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { generateDate } from "../utils/generateDate";
+import { LuUsers2 } from "react-icons/lu";
+import { setAddPeopleM } from "../redux/slices/stateSlice";
 
 const Board = () => {
 	const [backlogCollapse, setBacklogCollapse] = useState(false);
@@ -16,6 +18,7 @@ const Board = () => {
 	const [progressCollapse, setProgressCollapse] = useState(false);
 	const [doneCollapse, setDoneCollapse] = useState(false);
 	const auth = useSelector((store) => store.auth);
+	const dispatch = useDispatch();
 
 	return (
 		<div className="dashboard-container">
@@ -24,8 +27,17 @@ const Board = () => {
 					<h3>Welcome! {auth.name.split(" ")[0]}</h3>
 					<h4>{generateDate()}</h4>
 				</div>
-				<div>
-					<h2>Board</h2>
+				<div className="header-board">
+					<div>
+						<h2>Board</h2>
+						<span
+							className="add-people"
+							onClick={() => dispatch(setAddPeopleM(true))}
+						>
+							<LuUsers2 />
+							<span>Add People</span>
+						</span>
+					</div>
 					<span className="header-time">
 						<p>This week</p>
 						<IoIosArrowDown />

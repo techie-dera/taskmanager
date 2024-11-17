@@ -34,6 +34,23 @@
 	align-items: center;
 }
 
+.header-board > div {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 10px;
+}
+.add-people {
+	cursor: pointer;
+	margin-left: 10px;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	gap: 4px;
+	opacity: 0.7;
+}
+
 .dashboard-header .header-time {
 	display: flex;
 	align-items: center;
