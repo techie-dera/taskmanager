@@ -112,8 +112,8 @@
 .checklist-details-box input[type="checkbox"] {
 	min-height: 16px;
 	min-width: 16px;
-	border-radius: 18px !important;
-	border: 1px solid #66666638 !important;
+	cursor: pointer;
+	accent-color: #17a2b8;
 }
 
 .task-btns {

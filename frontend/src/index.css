@@ -4,6 +4,10 @@
 	box-sizing: border-box;
 	font-family: "Poppins", sans-serif;
 	font-style: normal;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 #root,
 .app-container {
