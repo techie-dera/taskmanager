@@ -21,6 +21,7 @@ const PORT = process.env.PORT || 3000;
 // All routers
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
+const taskRoute = require("./routes/task");
 
 // Connect to Database
 main()
@@ -42,6 +43,7 @@ app.get("/", (req, res) => {
 // All routes
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/task", taskRoute);
 
 // Invaild routes
 app.all("*", (req, res) => {
