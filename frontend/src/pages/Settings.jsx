@@ -6,6 +6,7 @@ import { CiLock, CiMail, CiUser } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeAuth } from "../redux/slices/authSlice";
+import getHeader from "../utils/header";
 
 const Settings = () => {
 	const auth = useSelector((store) => store.auth);
@@ -35,17 +36,13 @@ const Settings = () => {
 		newPassword = newPassword.trim();
 		setNewPassword(newPassword);
 	};
-	const token = localStorage.getItem("token");
 	// Update
 	const updateUser = (e) => {
 		toast.loading("Wait until you SignUp");
 		e.target.disabled = true;
 		fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/update`, {
 			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
-			},
+			headers: getHeader(),
 			body: JSON.stringify({
 				name: name,
 				email: email,

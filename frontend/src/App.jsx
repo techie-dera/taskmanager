@@ -9,21 +9,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { addAuth } from "./redux/slices/authSlice";
 import { setLoading } from "./redux/slices/stateSlice";
 import { TaskCardPublic } from "./components/Model";
+import getHeader from "./utils/header";
 
 function App() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
 	const loading = useSelector((store) => store.state.loading);
-	const token = localStorage.getItem("token");
 	const getAuthUser = (token) => {
 		dispatch(setLoading(true));
 		fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/profile`, {
 			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
-			},
+			headers: getHeader(),
 		})
 			.then((res) => res.json())
 			.then((json) => {
