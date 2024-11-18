@@ -8,8 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { removeAuth } from "../redux/slices/authSlice";
 
 const Settings = () => {
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
+	const auth = useSelector((store) => store.auth);
+	const [name, setName] = useState(auth.name);
+	const [email, setEmail] = useState(auth.email);
 	const [oldPassword, setOldPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [load, setLoad] = useState("");
@@ -20,9 +21,6 @@ const Settings = () => {
 	);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	useEffect(() => {
-		handleResetInput();
-	}, [dashboardSection]);
 
 	const handleName = (name) => {
 		name = name.charAt(0).toUpperCase() + name.slice(1);
@@ -61,7 +59,6 @@ const Settings = () => {
 				e.target.disabled = false;
 				toast.dismiss();
 				if (json?.message === "success") {
-					handleResetInput();
 					toast.success("Update Successfully");
 					localStorage.removeItem("token");
 					dispatch(removeAuth());
@@ -79,12 +76,6 @@ const Settings = () => {
 			});
 	};
 
-	const handleResetInput = () => {
-		setName("");
-		setEmail("");
-		setOldPassword("");
-		setNewPassword("");
-	};
 	const handleUpdate = (e) => {
 		if (name && email && newPassword && oldPassword) {
 			const validError = checkValidSignUpFrom(name, email, newPassword);
