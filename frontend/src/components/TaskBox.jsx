@@ -44,7 +44,7 @@ const TaskBox = ({
 					{taskMenuP && <TaskMenu setTaskMenuP={setTaskMenuP} />}
 				</div>
 			</div>
-			<h3>Hero Section</h3>
+			<h3 title="Hero Section">Hero Section</h3>
 			<div className="task-checklist">
 				<p>Checklist (1/3)</p>
 				<div onClick={() => setCollapse(!collapse)}>
