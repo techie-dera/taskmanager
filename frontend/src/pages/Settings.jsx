@@ -4,7 +4,8 @@ import { checkValidSignUpFrom } from "../utils/validate";
 import { PiEye, PiEyeClosedLight } from "react-icons/pi";
 import { CiLock, CiMail, CiUser } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
-import { addAuth } from "../redux/slices/authSlice";
+import { useNavigate } from "react-router-dom";
+import { removeAuth } from "../redux/slices/authSlice";
 
 const Settings = () => {
 	const [name, setName] = useState("");
@@ -18,6 +19,7 @@ const Settings = () => {
 		(store) => store.state.dashboardSection
 	);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	useEffect(() => {
 		handleResetInput();
 	}, [dashboardSection]);
@@ -60,8 +62,10 @@ const Settings = () => {
 				toast.dismiss();
 				if (json?.message === "success") {
 					handleResetInput();
-					dispatch(addAuth(json.data));
 					toast.success("Update Successfully");
+					localStorage.removeItem("token");
+					dispatch(removeAuth());
+					navigate("/login");
 				} else {
 					toast.error(json?.message);
 				}
