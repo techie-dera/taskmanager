@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../css/Model.css";
 import { useDispatch } from "react-redux";
 import {
@@ -8,10 +8,16 @@ import {
 	setTaskDeleteM,
 	setTaskCardM,
 } from "../redux/slices/stateSlice";
-import { AiFillDelete, AiOutlinePlus } from "react-icons/ai";
-import { PiCodesandboxLogoDuotone } from "react-icons/pi";
+import { AiFillDelete, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import {
+	PiCheckSquare,
+	PiCodesandboxLogoDuotone,
+	PiSquare,
+} from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { removeAuth } from "../redux/slices/authSlice";
+import useAddTask from "../hooks/useAddTask";
+import { toast } from "react-toastify";
 
 export const AddPeople = () => {
 	const dispatch = useDispatch();
@@ -111,20 +117,60 @@ export const TaskDelete = () => {
 export const TaskCard = () => {
 	const dispatch = useDispatch();
 	const dueDate = useRef(null);
-
 	const [title, setTitle] = useState("");
 	const [priority, setPriority] = useState("");
-	const handleTaskCard = (e) => {
-		e.preventDefault();
-		console.log(title);
-		console.log(priority);
-		console.log(dueDate.current?.value);
+	const [checklist, setChecklist] = useState([]);
+	const [listBox, setListBox] = useState(0);
+	const [load, setLoad] = useState("");
+
+	const handleAddTask = (e) => {
+		if (title && priority && checklist.length > 0) {
+			setLoad("Loading...");
+			useAddTask(
+				e,
+				setLoad,
+				title,
+				priority,
+				checklist,
+				dueDate.current.value,
+				dispatch
+			);
+		} else {
+			toast.error("All fields are required");
+		}
+	};
+
+	const handleAddChecklist = () => {
+		console.log(checklist);
+		let list = checklist;
+		list.push({ name: "", isDone: false });
+		setChecklist(list);
+		setListBox(checklist.length);
+	};
+	const handleDeleteChecklist = (idx) => {
+		console.log(idx);
+		if (listBox > 0) {
+			console.log(checklist);
+			let list = checklist;
+			list.splice(idx, 1);
+			console.log(list);
+			setChecklist(list);
+			setListBox(checklist.length);
+		}
+	};
+
+	const handleTitle = (name) => {
+		name = name.charAt(0).toUpperCase() + name.slice(1);
+		setTitle(name);
 	};
 	return (
 		<div className="model-container">
 			<form
 				className="model-box model-card"
-				onSubmit={(e) => handleTaskCard(e)}
+				onSubmit={(e) => {
+					e.preventDefault();
+					handleAddTask(e);
+				}}
 			>
 				<div className="model-card-details">
 					<span>
@@ -136,7 +182,7 @@ export const TaskCard = () => {
 						value={title}
 						placeholder="Enter Task Title"
 						className="model-input"
-						onChange={(e) => setTitle(e.target.value)}
+						onChange={(e) => handleTitle(e.target.value)}
 					/>
 					<div className="priority-box">
 						<span>
@@ -206,26 +252,71 @@ export const TaskCard = () => {
 						</div>
 					</div>
 					<span className="checklist-head">
-						Checklist (0/0) <span className="require">*</span>
+						Checklist (
+						{checklist.filter((item) => item.isDone == true).length}
+						/{listBox}) <span className="require">*</span>
 					</span>
 					<div className="checklist-box">
-						<div className="checklist-input-box">
-							<span className="checklist-btn checklist-btn-l">
-								<input type="checkbox" />
-							</span>
-							<input
-								className="model-input model-input-btn"
-								type="text"
-								placeholder="Add a task"
-								name="task"
-								// value={}
-							/>
-							<span className="checklist-btn checklist-btn-r">
-								<AiFillDelete cursor={"pointer"} />
-							</span>
-						</div>
+						{checklist?.map((el, idx) => {
+							return (
+								<div className="checklist-input-box">
+									<span
+										className="checklist-btn checklist-btn-l"
+										onClick={() =>
+											setChecklist(
+												checklist.map((item, i) =>
+													i === idx
+														? {
+																...item,
+																isDone: !el.isDone,
+														  }
+														: item
+												)
+											)
+										}
+									>
+										{!el.isDone ? (
+											<PiSquare fontSize={18} />
+										) : (
+											<PiCheckSquare fontSize={18} />
+										)}
+									</span>
+									<input
+										className="model-input model-input-btn"
+										type="text"
+										name={`item-${idx + 1}`}
+										placeholder="Add a task"
+										value={el.name}
+										onChange={(e) =>
+											setChecklist(
+												checklist.map((item, i) =>
+													i === idx
+														? {
+																...item,
+																name: e.target
+																	.value,
+														  }
+														: item
+												)
+											)
+										}
+									/>
+									<span
+										className="checklist-btn checklist-btn-r"
+										onClick={() =>
+											handleDeleteChecklist(idx)
+										}
+									>
+										<AiFillDelete />
+									</span>
+								</div>
+							);
+						})}
 					</div>
-					<span className="checklist-add">
+					<span
+						className="checklist-add"
+						onClick={handleAddChecklist}
+					>
 						<AiOutlinePlus fontSize={16} />
 						<span>Add New</span>
 					</span>
@@ -253,7 +344,7 @@ export const TaskCard = () => {
 						Cancel
 					</button>
 					<button className="model-submit" type="submit">
-						Save
+						{load == "" ? "Update" : load}
 					</button>
 				</div>
 			</form>
