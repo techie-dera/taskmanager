@@ -16,6 +16,7 @@ function App() {
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
 	const loading = useSelector((store) => store.state.loading);
+	const token = localStorage.getItem("token");
 	const getAuthUser = (token) => {
 		dispatch(setLoading(true));
 		fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/profile`, {
