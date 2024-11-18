@@ -88,7 +88,7 @@
 	position: relative;
 }
 .model-input-btn {
-	padding: 10px 30px;
+	padding: 8px 30px;
 }
 .checklist-btn {
 	position: absolute;
@@ -168,7 +168,7 @@
 }
 .priority-box span {
 	text-wrap: nowrap;
-	font-size: 14px;
+	font-size: 12px;
 	text-transform: uppercase;
 }
 .priority-box > div {
