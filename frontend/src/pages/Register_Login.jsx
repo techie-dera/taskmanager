@@ -53,7 +53,7 @@ const Register_Login = () => {
 				console.error("Error:", error);
 				setLoad("");
 				toast.dismiss();
-				toast.error("Error : " + error.code);
+				toast.error("Something went wrong");
 				e.target.disabled = false;
 			});
 	};
@@ -104,7 +104,7 @@ const Register_Login = () => {
 				console.error("Error:", error);
 				setLoad("");
 				toast.dismiss();
-				toast.error("Error : " + error.code);
+				toast.error("Something went wrong");
 				e.target.disabled = false;
 			});
 	};
