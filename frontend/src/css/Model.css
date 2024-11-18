@@ -91,15 +91,13 @@
 	padding: 8px 30px;
 }
 .checklist-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-}
-.checklist-input-box input[type="checkbox"] {
-	min-height: 15px;
-	min-width: 15px;
 	cursor: pointer;
-	accent-color: #17a2b8;
 }
 .checklist-btn-l {
 	left: 8px;
@@ -154,7 +152,7 @@
 }
 .require {
 	color: red;
-	font-size: 14px;
+	font-size: 14px !important;
 	margin-bottom: 5px;
 }
 .priority-box {
@@ -167,6 +165,10 @@
 	margin: 12px 0;
 }
 .priority-box span {
+	text-wrap: nowrap;
+	font-size: 14px;
+}
+.priority-box label span {
 	text-wrap: nowrap;
 	font-size: 12px;
 	text-transform: uppercase;
