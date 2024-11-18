@@ -5,6 +5,7 @@ const wrapAsync = require("../middlewares/wrapAsync");
 const { authorization } = require("../middlewares/authorization");
 
 router.get("/profile", authorization, wrapAsync(userControllers.getAuthUser));
+router.put("/update", authorization, wrapAsync(userControllers.updateUser));
 router.get("/users", authorization, wrapAsync(userControllers.getAllUsers));
 
 module.exports = router;

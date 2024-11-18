@@ -3,7 +3,8 @@ import { toast } from "react-toastify";
 import { checkValidSignUpFrom } from "../utils/validate";
 import { PiEye, PiEyeClosedLight } from "react-icons/pi";
 import { CiLock, CiMail, CiUser } from "react-icons/ci";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addAuth } from "../redux/slices/authSlice";
 
 const Settings = () => {
 	const [name, setName] = useState("");
@@ -16,6 +17,7 @@ const Settings = () => {
 	const dashboardSection = useSelector(
 		(store) => store.state.dashboardSection
 	);
+	const dispatch = useDispatch();
 	useEffect(() => {
 		handleResetInput();
 	}, [dashboardSection]);
@@ -33,14 +35,16 @@ const Settings = () => {
 		newPassword = newPassword.trim();
 		setNewPassword(newPassword);
 	};
+	const token = localStorage.getItem("token");
 	// Update
 	const updateUser = (e) => {
 		toast.loading("Wait until you SignUp");
 		e.target.disabled = true;
 		fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/update`, {
-			method: "POST",
+			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
 			},
 			body: JSON.stringify({
 				name: name,
@@ -56,7 +60,8 @@ const Settings = () => {
 				toast.dismiss();
 				if (json?.message === "success") {
 					handleResetInput();
-					toast.success(json?.message);
+					dispatch(addAuth(json.data));
+					toast.success("Update Successfully");
 				} else {
 					toast.error(json?.message);
 				}
