@@ -9,8 +9,9 @@ import {
 	setTaskCardM,
 } from "../redux/slices/stateSlice";
 import { AiFillDelete, AiOutlinePlus } from "react-icons/ai";
-import { CiLock } from "react-icons/ci";
 import { PiCodesandboxLogoDuotone } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
+import { removeAuth } from "../redux/slices/authSlice";
 
 export const AddPeople = () => {
 	const dispatch = useDispatch();
@@ -58,10 +59,11 @@ export const AddedPeople = () => {
 
 export const Logout = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const handleLogout = () => {
 		localStorage.removeItem("token");
+		dispatch(removeAuth());
 		dispatch(setLogoutM(false));
-		window.location.reload();
 		navigate("/login");
 	};
 	return (
