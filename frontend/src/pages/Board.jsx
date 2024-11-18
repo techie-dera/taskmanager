@@ -16,7 +16,7 @@ import {
 	setTaskFilterP,
 } from "../redux/slices/stateSlice";
 import { TaskFilter } from "../components/PopUp";
-
+import useAllTask from "../hooks/useAllTask";
 const Board = () => {
 	const [backlogCollapse, setBacklogCollapse] = useState(false);
 	const [todoCollapse, setTodoCollapse] = useState(false);
@@ -37,6 +37,8 @@ const Board = () => {
 			document.removeEventListener("mousedown", handleClickOutside);
 		};
 	}, [taskFilter]);
+
+	useAllTask();
 
 	return (
 		<div className="dashboard-container">
