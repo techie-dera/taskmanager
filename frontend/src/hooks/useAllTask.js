@@ -33,6 +33,7 @@ const useAllTask = () => {
 			})
 			.catch((error) => {
 				console.error("Error:", error);
+				dispatch(setLoading(false));
 			});
 	};
 

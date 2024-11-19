@@ -11,6 +11,7 @@ const useAddTask = (
 	dueDate,
 	dispatch
 ) => {
+	setLoad("Loading...");
 	e.target.disabled = true;
 	fetch(`${import.meta.env.VITE_BACKEND_URL}/api/task/add`, {
 		method: "POST",
