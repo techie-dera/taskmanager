@@ -187,9 +187,9 @@ export const TaskCard = () => {
 	const handleDeleteChecklist = (idx) => {
 		if (listBox > 0) {
 			let list = checklist;
-			list.splice(idx, 1);
+			list = list.filter((item, i) => i != idx);
 			setChecklist(list);
-			setListBox(checklist.length);
+			setListBox(list.length);
 		}
 	};
 
