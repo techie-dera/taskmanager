@@ -4,7 +4,7 @@
 	left: 0px;
 	height: 100vh;
 	width: 100vw;
-	z-index: 1000;
+	z-index: 110;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -251,14 +251,6 @@
 	margin: 10px 0 6px 0;
 }
 
-.checkbox-public > div {
-	height: 18px;
-	width: 18px;
-	position: absolute;
-	z-index: 100;
-	top: 50%;
-	transform: translateY(-50%);
-}
 .checklist-box-public {
 	max-height: 40vh;
 }

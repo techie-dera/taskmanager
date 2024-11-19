@@ -17,6 +17,10 @@
 
 /* Loading Style */
 .loading-container {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 99;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -25,12 +29,12 @@
 }
 
 .loading-box {
-	transform: translateY(-150%);
+	transform: translateY(-200%);
 }
 
 .loading {
-	height: 70px;
-	width: 70px;
+	height: 60px;
+	width: 60px;
 	border-radius: 50%;
 	border: 10px solid #8daab9cc;
 	border-bottom: 10px solid transparent;
