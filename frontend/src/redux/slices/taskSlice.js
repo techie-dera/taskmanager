@@ -21,8 +21,11 @@ const taskSlice = createSlice({
 		setDone: (state, action) => {
 			state.done = action.payload;
 		},
+		addTodoTask: (state, action) => {
+			state.todo = [...state.todo, action.payload];
+		},
 	},
 });
-export const { setBacklog, setTodo, setInProgress, setDone } =
+export const { setBacklog, setTodo, setInProgress, setDone, addTodoTask } =
 	taskSlice.actions;
 export default taskSlice.reducer;
