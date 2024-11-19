@@ -7,6 +7,7 @@ import {
 	setLogoutM,
 	setTaskDeleteM,
 	setTaskCardM,
+	setTaskM,
 } from "../redux/slices/stateSlice";
 import { AiFillDelete, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import {
@@ -22,6 +23,7 @@ import useDeleteTask from "../hooks/useDeleteTask";
 import useGetTask from "../hooks/useGetTask";
 import Loading from "./Loading";
 import { getMonthDate } from "../utils/generateDate";
+import useUpdateTask from "../hooks/useUpdateTask";
 
 export const AddPeople = () => {
 	const dispatch = useDispatch();
@@ -130,12 +132,14 @@ export const TaskDelete = () => {
 	);
 };
 export const TaskCard = () => {
+	const task = useSelector((store) => store.state.taskM);
+
 	const dispatch = useDispatch();
-	const dueDate = useRef(null);
-	const [title, setTitle] = useState("");
-	const [priority, setPriority] = useState("");
-	const [checklist, setChecklist] = useState([]);
-	const [listBox, setListBox] = useState(0);
+	const dueDate = useRef(task?.dueDate || null);
+	const [title, setTitle] = useState(task?.title || "");
+	const [priority, setPriority] = useState(task?.priority || "");
+	const [checklist, setChecklist] = useState(task?.checklist || []);
+	const [listBox, setListBox] = useState(task?.checklist?.length || 0);
 	const [load, setLoad] = useState("");
 
 	const handleAddTask = (e) => {
@@ -144,15 +148,28 @@ export const TaskCard = () => {
 				return list.name == "";
 			});
 			if (listName.length == 0) {
-				useAddTask(
-					e,
-					setLoad,
-					title,
-					priority,
-					checklist,
-					dueDate.current.value,
-					dispatch
-				);
+				if (task == "") {
+					useAddTask(
+						e,
+						setLoad,
+						title,
+						priority,
+						checklist,
+						dueDate.current.value,
+						dispatch
+					);
+				} else {
+					useUpdateTask(
+						e,
+						setLoad,
+						title,
+						priority,
+						checklist,
+						dueDate.current.value,
+						dispatch,
+						task._id
+					);
+				}
 			} else {
 				toast.error("Checklist is required");
 			}
@@ -163,9 +180,9 @@ export const TaskCard = () => {
 
 	const handleAddChecklist = () => {
 		let list = checklist;
-		list.push({ name: "", isDone: false });
+		list = [...list, { name: "", isDone: false }];
 		setChecklist(list);
-		setListBox(checklist.length);
+		setListBox(list.length);
 	};
 	const handleDeleteChecklist = (idx) => {
 		if (listBox > 0) {
@@ -293,9 +310,15 @@ export const TaskCard = () => {
 										}
 									>
 										{!el.isDone ? (
-											<PiSquare fontSize={18} />
+											<PiSquare
+												fontSize={18}
+												cursor={"pointer"}
+											/>
 										) : (
-											<PiCheckSquare fontSize={18} />
+											<PiCheckSquare
+												fontSize={18}
+												cursor={"pointer"}
+											/>
 										)}
 									</span>
 									<input
@@ -324,7 +347,7 @@ export const TaskCard = () => {
 											handleDeleteChecklist(idx)
 										}
 									>
-										<AiFillDelete />
+										<AiFillDelete cursor={"pointer"} />
 									</span>
 								</div>
 							);
@@ -356,12 +379,15 @@ export const TaskCard = () => {
 					<button
 						type="button"
 						className="model-cancel"
-						onClick={() => dispatch(setTaskCardM(false))}
+						onClick={() => {
+							dispatch(setTaskCardM(false));
+							dispatch(setTaskM(""));
+						}}
 					>
 						Cancel
 					</button>
 					<button className="model-submit" type="submit">
-						{load == "" ? "Update" : load}
+						{load == "" ? "Save" : load}
 					</button>
 				</div>
 			</form>
