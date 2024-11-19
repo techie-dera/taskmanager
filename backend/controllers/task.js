@@ -1,8 +1,9 @@
 const Task = require("../models/task");
 
 const getTask = async (req, res) => {
-	console.log(req.body);
-	res.status(200).send({ message: "success", data: "data" });
+	const { id } = req.params;
+	let task = await Task.findById(id);
+	res.status(200).send({ message: "success", data: task });
 };
 const getAllTask = async (req, res) => {
 	let backlog = await Task.find({ category: "backlog" });

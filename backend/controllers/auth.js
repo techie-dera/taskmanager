@@ -30,7 +30,7 @@ const loginUser = async (req, res) => {
 	}
 	const isPasswordValid = bcrypt.compareSync(password, user.password);
 	if (!isPasswordValid) {
-		return res.status(401).json({ message: "Invalid Password" });
+		return res.status(401).json({ message: "Incorrect Password" });
 	}
 	const jwt = generateToken(user._id);
 	user.password = null;
