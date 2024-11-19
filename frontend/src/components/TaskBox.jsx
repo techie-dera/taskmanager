@@ -4,7 +4,8 @@ import { TbDots } from "react-icons/tb";
 import { TaskMenu } from "./PopUp";
 import { PiCheckSquare, PiSquare } from "react-icons/pi";
 import { getMonthDate } from "../utils/generateDate";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setTaskMId } from "../redux/slices/stateSlice";
 
 const TaskBox = ({
 	backlogCollapse,
@@ -16,7 +17,7 @@ const TaskBox = ({
 }) => {
 	const [collapse, setCollapse] = useState(true);
 	const [taskMenuP, setTaskMenuP] = useState(false);
-
+	const dispatch = useDispatch();
 	const handleClickOutside = (event) => {
 		if (taskMenuP && !event?.target.closest(".popup-box")) {
 			setTaskMenuP(false);
@@ -44,9 +45,14 @@ const TaskBox = ({
 					<TbDots
 						fontSize={18}
 						cursor={"pointer"}
-						onClick={() => setTaskMenuP(true)}
+						onClick={() => {
+							setTaskMenuP(true);
+							dispatch(setTaskMId(task?._id));
+						}}
 					/>
-					{taskMenuP && <TaskMenu setTaskMenuP={setTaskMenuP} />}
+					{taskMenuP && (
+						<TaskMenu setTaskMenuP={setTaskMenuP} id={task?._id} />
+					)}
 				</div>
 			</div>
 			<h3 title="Hero Section">{task?.title}</h3>
@@ -71,6 +77,7 @@ const TaskBox = ({
 				{task?.checklist.map((list, idx) => {
 					return (
 						<label
+							key={idx + "checklist-box"}
 							className="checklist-details-box"
 							htmlFor="task1"
 						>
