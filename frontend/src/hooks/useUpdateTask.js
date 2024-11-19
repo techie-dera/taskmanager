@@ -29,7 +29,7 @@ const useUpdateTask = (
 			setLoad("");
 			e.target.disabled = false;
 			if (json?.message === "success") {
-				toast.success("Task Added Successfully");
+				toast.success("Task Updated Successfully");
 				dispatch(updateTodoTask(json.data));
 				dispatch(setTaskCardM(false));
 				dispatch(setTaskM(""));
