@@ -22,8 +22,14 @@ const addTask = async (req, res) => {
 	res.status(200).send({ message: "success", data: task });
 };
 const updateTask = async (req, res) => {
-	console.log(req.body);
-	res.status(200).send({ message: "success", data: "data" });
+	let { title, priority, checklist, dueDate } = req.body;
+	const { id } = req.params;
+	let updatedTask = await Task.findByIdAndUpdate(
+		id,
+		{ title, priority, checklist, dueDate },
+		{ new: true }
+	);
+	res.status(200).send({ message: "success", data: updatedTask });
 };
 const deleteTask = async (req, res) => {
 	const { id } = req.params;
