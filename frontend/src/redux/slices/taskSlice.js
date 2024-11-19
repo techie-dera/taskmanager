@@ -24,6 +24,11 @@ const taskSlice = createSlice({
 		addTodoTask: (state, action) => {
 			state.todo = [...state.todo, action.payload];
 		},
+		updateTodoTask: (state, action) => {
+			state.todo = state.todo.map((t) =>
+				t._id == action.payload._id ? action.payload : t
+			);
+		},
 		deleteBacklogTask: (state, action) => {
 			state.backlog = state.backlog.filter(
 				(t) => t._id != action.payload._id
@@ -48,6 +53,7 @@ export const {
 	setInProgress,
 	setDone,
 	addTodoTask,
+	updateTodoTask,
 	deleteBacklogTask,
 	deleteTodoTask,
 	deleteInProgressTask,

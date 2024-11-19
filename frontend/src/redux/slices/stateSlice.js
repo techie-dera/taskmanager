@@ -12,6 +12,7 @@ const stateSlice = createSlice({
 		taskCardM: false,
 		taskFilterP: false,
 		taskMId: "",
+		taskM: "",
 	},
 	reducers: {
 		updateDashboardSection: (state, action) => {
@@ -41,6 +42,9 @@ const stateSlice = createSlice({
 		setTaskMId: (state, action) => {
 			state.taskMId = action.payload;
 		},
+		setTaskM: (state, action) => {
+			state.taskM = action.payload;
+		},
 	},
 });
 export const {
@@ -53,5 +57,6 @@ export const {
 	setTaskCardM,
 	setTaskFilterP,
 	setTaskMId,
+	setTaskM,
 } = stateSlice.actions;
 export default stateSlice.reducer;
