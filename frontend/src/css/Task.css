@@ -140,8 +140,10 @@
 .task-btn-red {
 	background: #cf3636;
 	color: white;
+	cursor: default;
 }
 .task-btn-green {
 	background: #63c05b;
 	color: white;
+	cursor: default;
 }

@@ -104,9 +104,16 @@ const TaskBox = ({
 					<div></div>
 				)}
 				<div>
-					<div className="task-btn">PROGRESS</div>
-					<div className="task-btn">TO-DO</div>
-					<div className="task-btn">DONE</div>
+					{taskName != "backlog" && (
+						<div className="task-btn">BACKLOG</div>
+					)}
+					{taskName != "todo" && (
+						<div className="task-btn">TO-DO</div>
+					)}
+					{taskName != "inProgress" && (
+						<div className="task-btn">PROGRESS</div>
+					)}
+					{taskName != "done" && <div className="task-btn">DONE</div>}
 				</div>
 			</div>
 		</div>
