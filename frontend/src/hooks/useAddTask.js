@@ -1,6 +1,7 @@
 import getHeader from "../utils/header";
 import { toast } from "react-toastify";
 import { setTaskCardM } from "../redux/slices/stateSlice";
+import { addTodoTask } from "../redux/slices/taskSlice";
 const useAddTask = (
 	e,
 	setLoad,
@@ -27,6 +28,7 @@ const useAddTask = (
 			e.target.disabled = false;
 			if (json?.message === "success") {
 				toast.success("Task Added Successfully");
+				dispatch(addTodoTask(json.data));
 				dispatch(setTaskCardM(false));
 			} else {
 				toast.error(json?.message);

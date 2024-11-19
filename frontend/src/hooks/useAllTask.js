@@ -8,6 +8,7 @@ import {
 	setDone,
 } from "../redux/slices/taskSlice";
 import { setLoading } from "../redux/slices/stateSlice";
+import { toast } from "react-toastify";
 
 const useAllTask = () => {
 	const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const useAllTask = () => {
 					dispatch(setDone(json.data.done));
 					dispatch(setLoading(false));
 				} else {
-					console.log("hi " + json?.message);
+					toast.error("Something went wrong");
 					dispatch(setLoading(false));
 				}
 			})
