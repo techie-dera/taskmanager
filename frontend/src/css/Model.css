@@ -97,7 +97,7 @@
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	cursor: pointer;
+	/* cursor: pointer; */
 }
 .checklist-btn-l {
 	left: 8px;
@@ -226,6 +226,8 @@
 	position: absolute;
 	top: 30px;
 	left: 20px;
+	width: fit-content;
+	text-decoration: none;
 }
 .model-public {
 	background-color: #fff;
@@ -246,6 +248,7 @@
 }
 .priority-public span {
 	font-size: 10px;
+	text-transform: uppercase;
 }
 .checklist-public {
 	margin: 10px 0 6px 0;
