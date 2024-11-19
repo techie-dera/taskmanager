@@ -1,12 +1,18 @@
 import { TbDots } from "react-icons/tb";
 import TaskBox from "../components/TaskBox";
+import { useSelector } from "react-redux";
 
 const Backlog = ({ backlogCollapse }) => {
+	const backlog = useSelector((store) => store.task.backlog);
 	return (
 		<div className="task-container">
-			<TaskBox backlogCollapse={backlogCollapse} />
-			<TaskBox backlogCollapse={backlogCollapse} />
-			<TaskBox backlogCollapse={backlogCollapse} />
+			{backlog?.map((task, index) => (
+				<TaskBox
+					key={index}
+					task={task}
+					backlogCollapse={backlogCollapse}
+				/>
+			))}
 		</div>
 	);
 };

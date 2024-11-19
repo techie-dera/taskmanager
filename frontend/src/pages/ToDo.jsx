@@ -1,11 +1,13 @@
+import { useSelector } from "react-redux";
 import TaskBox from "../components/TaskBox";
 
 const ToDo = ({ todoCollapse }) => {
+	const todo = useSelector((store) => store.task.todo);
 	return (
 		<div className="task-container">
-			<TaskBox todoCollapse={todoCollapse} />
-			<TaskBox todoCollapse={todoCollapse} />
-			<TaskBox todoCollapse={todoCollapse} />
+			{todo?.map((task, index) => (
+				<TaskBox key={index} task={task} todoCollapse={todoCollapse} />
+			))}
 		</div>
 	);
 };
