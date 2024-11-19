@@ -24,8 +24,33 @@ const taskSlice = createSlice({
 		addTodoTask: (state, action) => {
 			state.todo = [...state.todo, action.payload];
 		},
+		deleteBacklogTask: (state, action) => {
+			state.backlog = state.backlog.filter(
+				(t) => t._id != action.payload._id
+			);
+		},
+		deleteTodoTask: (state, action) => {
+			state.todo = state.todo.filter((t) => t._id != action.payload._id);
+		},
+		deleteInProgressTask: (state, action) => {
+			state.inProgress = state.inProgress.filter(
+				(t) => t._id != action.payload._id
+			);
+		},
+		deleteDoneTask: (state, action) => {
+			state.done = state.done.filter((t) => t._id != action.payload._id);
+		},
 	},
 });
-export const { setBacklog, setTodo, setInProgress, setDone, addTodoTask } =
-	taskSlice.actions;
+export const {
+	setBacklog,
+	setTodo,
+	setInProgress,
+	setDone,
+	addTodoTask,
+	deleteBacklogTask,
+	deleteTodoTask,
+	deleteInProgressTask,
+	deleteDoneTask,
+} = taskSlice.actions;
 export default taskSlice.reducer;
