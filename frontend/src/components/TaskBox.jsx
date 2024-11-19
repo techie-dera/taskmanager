@@ -37,7 +37,11 @@ const TaskBox = ({
 		<div className="task-box">
 			<div className="priority-menu">
 				<div>
-					<div className="circle-box"></div>
+					<div
+						className={`circle-box ${task?.priority
+							?.split(" ")[0]
+							?.toLowerCase()}-box`}
+					></div>
 					<p>{task?.priority}</p>
 					<div className="circle-name-box">AK</div>
 				</div>

@@ -40,8 +40,16 @@
 .priority-menu .circle-box {
 	height: 10px;
 	width: 10px;
-	background-color: rgb(254, 111, 111);
 	border-radius: 50%;
+}
+.high-box {
+	background-color: #ff2473;
+}
+.moderate-box {
+	background-color: #18b0ff;
+}
+.low-box {
+	background-color: #63c05b;
 }
 .priority-menu .circle-name-box {
 	display: flex;
