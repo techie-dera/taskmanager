@@ -26,6 +26,10 @@
 	align-items: center;
 	margin-bottom: 10px;
 }
+
+.priority-menu p {
+	text-transform: uppercase;
+}
 .priority-menu > div {
 	display: flex;
 	justify-content: start;
