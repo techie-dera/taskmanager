@@ -55,6 +55,7 @@
 
 .task-box h3 {
 	margin: 0;
+	width: fit-content;
 	font-size: 18px;
 	font-weight: 500;
 	-webkit-line-clamp: 2;

@@ -59,7 +59,7 @@ const TaskBox = ({
 					)}
 				</div>
 			</div>
-			<h3 title="Hero Section">{task?.title}</h3>
+			<h3 title={task?.title}>{task?.title}</h3>
 			<div className="task-checklist">
 				<p>
 					Checklist (
