@@ -25,14 +25,12 @@ const useAllTask = () => {
 					dispatch(setTodo(json.data.todo));
 					dispatch(setInProgress(json.data.inProgress));
 					dispatch(setDone(json.data.done));
-					dispatch(setLoading(false));
-				} else {
-					toast.error("Something went wrong");
-					dispatch(setLoading(false));
 				}
+				dispatch(setLoading(false));
 			})
 			.catch((error) => {
 				console.error("Error:", error);
+				toast.error("Something went wrong");
 				dispatch(setLoading(false));
 			});
 	};
