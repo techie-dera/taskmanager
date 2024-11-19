@@ -35,7 +35,7 @@ function App() {
 				}
 			})
 			.catch((err) => {
-				console.log(err);
+				toast.error("Something went wrong");
 				dispatch(setLoading(false));
 			});
 	};
