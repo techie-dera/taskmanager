@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../css/Model.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	setAddedPeopleM,
 	setAddPeopleM,
@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { removeAuth } from "../redux/slices/authSlice";
 import useAddTask from "../hooks/useAddTask";
 import { toast } from "react-toastify";
+import useDeleteTask from "../hooks/useDeleteTask";
 
 export const AddPeople = () => {
 	const dispatch = useDispatch();
@@ -95,6 +96,12 @@ export const Logout = () => {
 };
 export const TaskDelete = () => {
 	const dispatch = useDispatch();
+	const id = useSelector((store) => store.state.taskMId);
+	const [load, setLoad] = useState("");
+	const handleTaskDelete = (e) => {
+		useDeleteTask(e, setLoad, dispatch, id);
+	};
+
 	return (
 		<div className="model-container">
 			<div className="model-box model-box-s">
@@ -102,7 +109,12 @@ export const TaskDelete = () => {
 					Are you sure you want to Delete?
 				</h3>
 				<div className="model-btns">
-					<button className="model-submit">Yes, Delete</button>
+					<button
+						className="model-submit"
+						onClick={(e) => handleTaskDelete(e)}
+					>
+						{load ? "Loading..." : "Yes, Delete"}
+					</button>
 					<button
 						className="model-cancel"
 						onClick={() => dispatch(setTaskDeleteM(false))}
@@ -129,7 +141,6 @@ export const TaskCard = () => {
 				return list.name == "";
 			});
 			if (listName.length == 0) {
-				setLoad("Loading...");
 				useAddTask(
 					e,
 					setLoad,
@@ -376,31 +387,15 @@ export const TaskCardPublic = () => {
 					</div>
 					<div className="checklist-box checklist-box-public">
 						<div className="checklist-input-box">
-							<span className="checklist-btn checklist-btn-l checkbox-public">
-								<input type="checkbox" checked />
-								<div></div>
+							<span className="checklist-btn checklist-btn-l">
+								{true ? (
+									<PiSquare fontSize={18} />
+								) : (
+									<PiCheckSquare fontSize={18} />
+								)}
 							</span>
 							<p className="model-input model-input-btn">
 								Task to be done
-							</p>
-						</div>
-						<div className="checklist-input-box">
-							<span className="checklist-btn checklist-btn-l checkbox-public">
-								<input type="checkbox" />
-								<div></div>
-							</span>
-							<p className="model-input model-input-btn">
-								Task to be done
-							</p>
-						</div>
-						<div className="checklist-input-box">
-							<span className="checklist-btn checklist-btn-l checkbox-public">
-								<input type="checkbox" />
-								<div></div>
-							</span>
-							<p className="model-input model-input-btn">
-								Lorem ipsum, dolor sit amet consectetur
-								adipisicing elit.
 							</p>
 						</div>
 					</div>
