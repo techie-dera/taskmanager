@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { TbDots } from "react-icons/tb";
 import { TaskMenu } from "./PopUp";
+import { PiCheckSquare, PiSquare } from "react-icons/pi";
+import { getMonthDate } from "../utils/generateDate";
+import { useSelector } from "react-redux";
 
 const TaskBox = ({
 	backlogCollapse,
@@ -9,6 +12,7 @@ const TaskBox = ({
 	progressCollapse,
 	doneCollapse,
 	task,
+	taskName,
 }) => {
 	const [collapse, setCollapse] = useState(true);
 	const [taskMenuP, setTaskMenuP] = useState(false);
@@ -47,7 +51,14 @@ const TaskBox = ({
 			</div>
 			<h3 title="Hero Section">{task?.title}</h3>
 			<div className="task-checklist">
-				<p>Checklist (1/3)</p>
+				<p>
+					Checklist (
+					{
+						task?.checklist.filter((list) => list.isDone == true)
+							.length
+					}
+					/{task?.checklist.length})
+				</p>
 				<div onClick={() => setCollapse(!collapse)}>
 					{collapse ? <IoIosArrowDown /> : <IoIosArrowUp />}
 				</div>
@@ -57,15 +68,34 @@ const TaskBox = ({
 					collapse && "task-checklist-details-collapse"
 				}`}
 			>
-				<label className="checklist-details-box" htmlFor="task1">
-					<input type="checkbox" id="task1" name="task1" />
-					<span>Task to be done</span>
-				</label>
+				{task?.checklist.map((list, idx) => {
+					return (
+						<label
+							className="checklist-details-box"
+							htmlFor="task1"
+						>
+							{!list.isDone ? (
+								<PiSquare fontSize={18} />
+							) : (
+								<PiCheckSquare fontSize={18} />
+							)}
+							<span>{list.name}</span>
+						</label>
+					);
+				})}
 			</div>
 			<div className="task-btns">
-				<div className="task-btn task-btn-red">
-					{task?.dueDate && "Feb 10th"}
-				</div>
+				{task?.dueDate ? (
+					<div
+						className={`task-btn task-btn-red ${
+							taskName == "done" && "task-btn-green"
+						}`}
+					>
+						{getMonthDate(task?.dueDate)}
+					</div>
+				) : (
+					<div></div>
+				)}
 				<div>
 					<div className="task-btn">PROGRESS</div>
 					<div className="task-btn">TO-DO</div>
