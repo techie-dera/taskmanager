@@ -14,6 +14,6 @@ router.get("/all", authorization, wrapAsync(getAllTask));
 router.get("/:id", wrapAsync(getTask));
 router.post("/add", authorization, wrapAsync(addTask));
 router.put("/update", authorization, wrapAsync(updateTask));
-router.delete("/delete", authorization, wrapAsync(deleteTask));
+router.delete("/:id", authorization, wrapAsync(deleteTask));
 
 module.exports = router;

@@ -16,7 +16,6 @@ const getAllTask = async (req, res) => {
 	});
 };
 const addTask = async (req, res) => {
-	console.log(req.body);
 	let { title, priority, checklist, dueDate } = req.body;
 	let newTask = new Task({ title, priority, checklist, dueDate });
 	let task = await newTask.save();
@@ -27,8 +26,9 @@ const updateTask = async (req, res) => {
 	res.status(200).send({ message: "success", data: "data" });
 };
 const deleteTask = async (req, res) => {
-	console.log(req.body);
-	res.status(200).send({ message: "success", data: "data" });
+	const { id } = req.params;
+	const deleteTask = await Task.findByIdAndDelete(id);
+	res.status(200).send({ message: "success", data: deleteTask });
 };
 
 module.exports = { getTask, getAllTask, addTask, updateTask, deleteTask };
