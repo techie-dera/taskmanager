@@ -14,11 +14,14 @@ import {
 	PiCodesandboxLogoDuotone,
 	PiSquare,
 } from "react-icons/pi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { removeAuth } from "../redux/slices/authSlice";
 import useAddTask from "../hooks/useAddTask";
 import { toast } from "react-toastify";
 import useDeleteTask from "../hooks/useDeleteTask";
+import useGetTask from "../hooks/useGetTask";
+import Loading from "./Loading";
+import { getMonthDate } from "../utils/generateDate";
 
 export const AddPeople = () => {
 	const dispatch = useDispatch();
@@ -366,12 +369,16 @@ export const TaskCard = () => {
 	);
 };
 export const TaskCardPublic = () => {
-	return (
+	const { id } = useParams();
+	const [task, setTask] = useState(null);
+	useGetTask(id, setTask);
+
+	return task != null ? (
 		<div className="model-container model-public">
-			<div className="nav-logo nav-logo-public">
+			<Link to={"/"} className="nav-logo nav-logo-public">
 				<PiCodesandboxLogoDuotone fontSize={22} />
 				<span>Pro Manage</span>
-			</div>
+			</Link>
 			<div className="model-box model-card">
 				<div className="model-card-details">
 					<div className="priority-box priority-public">
@@ -379,32 +386,51 @@ export const TaskCardPublic = () => {
 							className="priority-circel"
 							style={{ background: "red" }}
 						></span>
-						<span>High Priority</span>
+						<span>{task?.priority}</span>
 					</div>
-					<h3>Hero Section</h3>
+					<h3>{task?.title}</h3>
 					<div className="checklist-head checklist-public">
-						Checklist (0/0)
+						Checklist (
+						{
+							task?.checklist.filter(
+								(list) => list.isDone == true
+							).length
+						}
+						/{task?.checklist.length})
 					</div>
 					<div className="checklist-box checklist-box-public">
-						<div className="checklist-input-box">
-							<span className="checklist-btn checklist-btn-l">
-								{true ? (
-									<PiSquare fontSize={18} />
-								) : (
-									<PiCheckSquare fontSize={18} />
-								)}
-							</span>
-							<p className="model-input model-input-btn">
-								Task to be done
-							</p>
-						</div>
+						{task?.checklist.map((list, idx) => {
+							return (
+								<div
+									className="checklist-input-box"
+									key={idx + "checklist-box-public"}
+								>
+									<span className="checklist-btn checklist-btn-l">
+										{!list.isDone ? (
+											<PiSquare fontSize={18} />
+										) : (
+											<PiCheckSquare fontSize={18} />
+										)}
+									</span>
+									<p className="model-input model-input-btn">
+										{list.name}
+									</p>
+								</div>
+							);
+						})}
 					</div>
 				</div>
 				<div className="model-due">
-					<span>Due Date</span>
-					<div>Feb 10th</div>
+					{task?.dueDate && (
+						<>
+							<span>Due Date</span>
+							<div>{getMonthDate(task?.dueDate)}</div>
+						</>
+					)}
 				</div>
 			</div>
 		</div>
+	) : (
+		<Loading />
 	);
 };
