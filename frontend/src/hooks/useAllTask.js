@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import getHeader from "../utils/header";
-import { toast } from "react-toastify";
 import { useEffect } from "react";
 import {
 	setBacklog,
@@ -8,9 +7,12 @@ import {
 	setInProgress,
 	setDone,
 } from "../redux/slices/taskSlice";
+import { setLoading } from "../redux/slices/stateSlice";
+
 const useAllTask = () => {
 	const dispatch = useDispatch();
 	const fetchData = () => {
+		dispatch(setLoading(true));
 		fetch(`${import.meta.env.VITE_BACKEND_URL}/api/task/all`, {
 			method: "GET",
 			headers: getHeader(),
@@ -22,8 +24,10 @@ const useAllTask = () => {
 					dispatch(setTodo(json.data.todo));
 					dispatch(setInProgress(json.data.inProgress));
 					dispatch(setDone(json.data.done));
+					dispatch(setLoading(false));
 				} else {
-					console.log(json?.message);
+					console.log("hi " + json?.message);
+					dispatch(setLoading(false));
 				}
 			})
 			.catch((error) => {

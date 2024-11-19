@@ -26,7 +26,7 @@ const useAddTask = (
 			setLoad("");
 			e.target.disabled = false;
 			if (json?.message === "success") {
-				toast.success("Task Added");
+				toast.success("Task Added Successfully");
 				dispatch(setTaskCardM(false));
 			} else {
 				toast.error(json?.message);
