@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "../css/Model.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,7 +9,7 @@ import {
 	setTaskCardM,
 	setTaskM,
 } from "../redux/slices/stateSlice";
-import { AiFillDelete, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { AiFillDelete, AiOutlinePlus } from "react-icons/ai";
 import {
 	PiCheckSquare,
 	PiCodesandboxLogoDuotone,

@@ -3,11 +3,11 @@
 	flex-direction: column;
 	overflow-x: auto;
 	height: 100vh;
-	/* padding: 2px 16px; */
 	padding-left: 16px;
 	gap: 16px;
 	margin-left: 200px;
 	width: calc(100% - 200px);
+	min-width: 725px;
 }
 
 .dashboard-header {
@@ -93,13 +93,6 @@
 	justify-content: space-between;
 	align-items: center;
 	gap: 10px;
-}
-
-@media (max-width: 768px) {
-	.dashboard-container {
-		margin-left: 0;
-		width: 100%;
-	}
 }
 
 /* Scrollbar Style */
