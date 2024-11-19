@@ -16,8 +16,9 @@ function App() {
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
 	const loading = useSelector((store) => store.state.loading);
+	const auth = useSelector((store) => store.auth);
 	const token = localStorage.getItem("token");
-	const getAuthUser = (token) => {
+	const getAuthUser = () => {
 		dispatch(setLoading(true));
 		fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/profile`, {
 			method: "GET",
@@ -40,10 +41,10 @@ function App() {
 	};
 
 	useEffect(() => {
-		if (token) {
-			getAuthUser(token);
+		if (token && !auth) {
+			getAuthUser();
 		}
-	}, [token, pathname]);
+	}, [token, pathname, auth]);
 
 	return (
 		<div className="app-container">
