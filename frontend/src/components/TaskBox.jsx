@@ -51,7 +51,11 @@ const TaskBox = ({
 						}}
 					/>
 					{taskMenuP && (
-						<TaskMenu setTaskMenuP={setTaskMenuP} id={task?._id} />
+						<TaskMenu
+							setTaskMenuP={setTaskMenuP}
+							id={task?._id}
+							task={task}
+						/>
 					)}
 				</div>
 			</div>
