@@ -370,67 +370,81 @@ export const TaskCard = () => {
 };
 export const TaskCardPublic = () => {
 	const { id } = useParams();
-	const [task, setTask] = useState(null);
+	const [task, setTask] = useState([]);
 	useGetTask(id, setTask);
 
-	return task != null ? (
+	return task?.length == 0 ? (
+		<Loading />
+	) : (
 		<div className="model-container model-public">
 			<Link to={"/"} className="nav-logo nav-logo-public">
 				<PiCodesandboxLogoDuotone fontSize={22} />
 				<span>Pro Manage</span>
 			</Link>
-			<div className="model-box model-card">
-				<div className="model-card-details">
-					<div className="priority-box priority-public">
-						<span
-							className="priority-circel"
-							style={{ background: "red" }}
-						></span>
-						<span>{task?.priority}</span>
+
+			{task == null ? (
+				<div className="model-box model-task-null">
+					<h3>Task Not Found</h3>
+					<p>
+						The task you are looking for does not exist or has been
+						deleted. Please check the URL and try again.
+					</p>
+					<Link to={"/"} className="model-btn">
+						Back to Home
+					</Link>
+				</div>
+			) : (
+				<div className="model-box model-card">
+					<div className="model-card-details">
+						<div className="priority-box priority-public">
+							<span
+								className="priority-circel"
+								style={{ background: "red" }}
+							></span>
+							<span>{task?.priority}</span>
+						</div>
+						<h3>{task?.title}</h3>
+						<div className="checklist-head checklist-public">
+							Checklist (
+							{
+								task?.checklist?.filter(
+									(list) => list.isDone == true
+								).length
+							}
+							/{task?.checklist?.length})
+						</div>
+						<div className="checklist-box checklist-box-public">
+							{task?.checklist?.map((list, idx) => {
+								return (
+									<div
+										className="checklist-input-box"
+										key={idx + "checklist-box-public"}
+									>
+										<span className="checklist-btn checklist-btn-l">
+											{!list.isDone ? (
+												<PiSquare fontSize={18} />
+											) : (
+												<PiCheckSquare fontSize={18} />
+											)}
+										</span>
+										<p className="model-input model-input-btn">
+											{list.name}
+										</p>
+									</div>
+								);
+							})}
+						</div>
 					</div>
-					<h3>{task?.title}</h3>
-					<div className="checklist-head checklist-public">
-						Checklist (
-						{
-							task?.checklist.filter(
-								(list) => list.isDone == true
-							).length
-						}
-						/{task?.checklist.length})
-					</div>
-					<div className="checklist-box checklist-box-public">
-						{task?.checklist.map((list, idx) => {
-							return (
-								<div
-									className="checklist-input-box"
-									key={idx + "checklist-box-public"}
-								>
-									<span className="checklist-btn checklist-btn-l">
-										{!list.isDone ? (
-											<PiSquare fontSize={18} />
-										) : (
-											<PiCheckSquare fontSize={18} />
-										)}
-									</span>
-									<p className="model-input model-input-btn">
-										{list.name}
-									</p>
-								</div>
-							);
-						})}
+					<div className="model-due">
+						{task?.dueDate && (
+							<>
+								<span>Due Date</span>
+								<div>{getMonthDate(task?.dueDate)}</div>
+							</>
+						)}
 					</div>
 				</div>
-				<div className="model-due">
-					{task?.dueDate && (
-						<>
-							<span>Due Date</span>
-							<div>{getMonthDate(task?.dueDate)}</div>
-						</>
-					)}
-				</div>
-			</div>
+			)}
 		</div>
-	) : (
-		<Loading />
 	);
 };
