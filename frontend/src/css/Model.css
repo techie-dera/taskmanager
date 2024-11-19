@@ -32,6 +32,14 @@
 	justify-content: space-between;
 	font-size: 16px;
 }
+.model-task-null {
+	align-items: center;
+}
+.model-task-null p {
+	text-align: center;
+	opacity: 0.9;
+	font-size: 14px;
+}
 .model-card-details {
 	height: 100%;
 	width: 100%;

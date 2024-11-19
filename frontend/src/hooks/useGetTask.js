@@ -12,6 +12,7 @@ const useGetTask = (id, setTask) => {
 					setTask(json.data);
 				} else {
 					toast.error("Something went wrong");
+					setTask(null);
 				}
 			})
 			.catch((error) => {
