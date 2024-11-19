@@ -8,6 +8,7 @@ const TaskBox = ({
 	todoCollapse,
 	progressCollapse,
 	doneCollapse,
+	task,
 }) => {
 	const [collapse, setCollapse] = useState(true);
 	const [taskMenuP, setTaskMenuP] = useState(false);
@@ -32,7 +33,7 @@ const TaskBox = ({
 			<div className="priority-menu">
 				<div>
 					<div className="circle-box"></div>
-					<p>HIGH PRIORITY</p>
+					<p>{task?.priority}</p>
 					<div className="circle-name-box">AK</div>
 				</div>
 				<div className="relative">
@@ -44,7 +45,7 @@ const TaskBox = ({
 					{taskMenuP && <TaskMenu setTaskMenuP={setTaskMenuP} />}
 				</div>
 			</div>
-			<h3 title="Hero Section">Hero Section</h3>
+			<h3 title="Hero Section">{task?.title}</h3>
 			<div className="task-checklist">
 				<p>Checklist (1/3)</p>
 				<div onClick={() => setCollapse(!collapse)}>
@@ -60,20 +61,11 @@ const TaskBox = ({
 					<input type="checkbox" id="task1" name="task1" />
 					<span>Task to be done</span>
 				</label>
-				<label className="checklist-details-box" htmlFor="task2">
-					<input type="checkbox" id="task2" name="task2" />
-					<span>Task to be done</span>
-				</label>
-				<label className="checklist-details-box" htmlFor="task3">
-					<input type="checkbox" id="task3" name="task3" />
-					<span>
-						Lorem ipsum dolor sit, amet consectetur adipisicing
-						elit.
-					</span>
-				</label>
 			</div>
 			<div className="task-btns">
-				<div className="task-btn task-btn-red">Feb 10th</div>
+				<div className="task-btn task-btn-red">
+					{task?.dueDate && "Feb 10th"}
+				</div>
 				<div>
 					<div className="task-btn">PROGRESS</div>
 					<div className="task-btn">TO-DO</div>
