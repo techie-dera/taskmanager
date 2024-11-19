@@ -5,6 +5,7 @@ import { IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
 import "../css/Navbar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogoutM, updateDashboardSection } from "../redux/slices/stateSlice";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
 	const dispatch = useDispatch();
@@ -14,10 +15,10 @@ const Navbar = () => {
 
 	return (
 		<div className="navbar">
-			<div className="nav-logo">
+			<Link to={"/"} className="nav-logo">
 				<PiCodesandboxLogoDuotone fontSize={22} />
 				<span>Pro Manage</span>
-			</div>
+			</Link>
 			<div className="nav-links">
 				<div>
 					<span

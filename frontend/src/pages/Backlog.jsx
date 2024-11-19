@@ -11,6 +11,7 @@ const Backlog = ({ backlogCollapse }) => {
 					key={index}
 					task={task}
 					backlogCollapse={backlogCollapse}
+					taskName={"backlog"}
 				/>
 			))}
 		</div>
