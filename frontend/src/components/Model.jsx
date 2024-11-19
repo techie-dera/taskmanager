@@ -125,35 +125,38 @@ export const TaskCard = () => {
 
 	const handleAddTask = (e) => {
 		if (title && priority && checklist.length > 0) {
-			setLoad("Loading...");
-			useAddTask(
-				e,
-				setLoad,
-				title,
-				priority,
-				checklist,
-				dueDate.current.value,
-				dispatch
-			);
+			const listName = checklist.filter((list) => {
+				return list.name == "";
+			});
+			if (listName.length == 0) {
+				setLoad("Loading...");
+				useAddTask(
+					e,
+					setLoad,
+					title,
+					priority,
+					checklist,
+					dueDate.current.value,
+					dispatch
+				);
+			} else {
+				toast.error("Checklist is required");
+			}
 		} else {
 			toast.error("All fields are required");
 		}
 	};
 
 	const handleAddChecklist = () => {
-		console.log(checklist);
 		let list = checklist;
 		list.push({ name: "", isDone: false });
 		setChecklist(list);
 		setListBox(checklist.length);
 	};
 	const handleDeleteChecklist = (idx) => {
-		console.log(idx);
 		if (listBox > 0) {
-			console.log(checklist);
 			let list = checklist;
 			list.splice(idx, 1);
-			console.log(list);
 			setChecklist(list);
 			setListBox(checklist.length);
 		}
