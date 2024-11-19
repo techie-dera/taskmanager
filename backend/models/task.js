@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Checklist = require("./checklist");
 
 const taskSchema = new mongoose.Schema(
 	{
