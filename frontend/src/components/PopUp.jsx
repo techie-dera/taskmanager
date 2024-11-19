@@ -1,11 +1,22 @@
 import React from "react";
 import "../css/PopUp.css";
 import { useDispatch } from "react-redux";
-import { setTaskDeleteM } from "../redux/slices/stateSlice";
+import {
+	setTaskCardM,
+	setTaskDeleteM,
+	setTaskM,
+} from "../redux/slices/stateSlice";
 import { toast } from "react-toastify";
 
-export const TaskMenu = ({ setTaskMenuP, id }) => {
+export const TaskMenu = ({ setTaskMenuP, id, task }) => {
 	const dispatch = useDispatch();
+
+	const handleTaskEdit = () => {
+		dispatch(setTaskM(task));
+		dispatch(setTaskCardM(true));
+		setTaskMenuP(false);
+	};
+
 	const handleTaskDelete = () => {
 		dispatch(setTaskDeleteM(true));
 		setTaskMenuP(false);
@@ -26,7 +37,7 @@ export const TaskMenu = ({ setTaskMenuP, id }) => {
 	};
 	return (
 		<div className="popup-box">
-			<button>Edit</button>
+			<button onClick={handleTaskEdit}>Edit</button>
 			<button onClick={() => handleSharelink(id)}>Share</button>
 			<button className="popup-delete" onClick={handleTaskDelete}>
 				Delete
