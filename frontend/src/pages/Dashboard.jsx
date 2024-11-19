@@ -1,7 +1,8 @@
+import { lazy } from "react";
 import Navbar from "./Navbar";
-import Board from "./Board";
-import Analytics from "./Analytics";
-import Settings from "./Settings";
+const Board = lazy(() => import("./Board.jsx"));
+const Analytics = lazy(() => import("./Analytics.jsx"));
+const Settings = lazy(() => import("./Settings.jsx"));
 import { useSelector } from "react-redux";
 import "../css/Dashboard.css";
 import {
