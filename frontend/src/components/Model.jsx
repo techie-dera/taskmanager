@@ -24,6 +24,8 @@ import useGetTask from "../hooks/useGetTask";
 import Loading from "./Loading";
 import { getMonthDate } from "../utils/generateDate";
 import useUpdateTask from "../hooks/useUpdateTask";
+import CheckBoxUnselect from "../assets/checkbox_unselect.png";
+import CheckBoxSelect from "../assets/checkbox_select.png";
 
 export const AddPeople = () => {
 	const dispatch = useDispatch();
@@ -310,14 +312,16 @@ export const TaskCard = () => {
 										}
 									>
 										{!el.isDone ? (
-											<PiSquare
-												fontSize={18}
-												cursor={"pointer"}
+											<img
+												src={CheckBoxUnselect}
+												alt="⬜"
+												className="model-checkbox"
 											/>
 										) : (
-											<PiCheckSquare
-												fontSize={18}
-												cursor={"pointer"}
+											<img
+												src={CheckBoxSelect}
+												alt="✅"
+												className="model-checkbox"
 											/>
 										)}
 									</span>

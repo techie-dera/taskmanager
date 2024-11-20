@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { TbDots } from "react-icons/tb";
 import { TaskMenu } from "./PopUp";
-import { PiCheckSquare, PiSquare } from "react-icons/pi";
 import { getMonthDate } from "../utils/generateDate";
 import { useDispatch } from "react-redux";
 import { setTaskMId } from "../redux/slices/stateSlice";
+import CheckBoxUnselect from "../assets/checkbox_unselect.png";
+import CheckBoxSelect from "../assets/checkbox_select.png";
 
 const TaskBox = ({
 	backlogCollapse,
@@ -90,9 +91,9 @@ const TaskBox = ({
 							htmlFor="task1"
 						>
 							{!list.isDone ? (
-								<PiSquare fontSize={18} />
+								<img src={CheckBoxUnselect} alt="⬜" />
 							) : (
-								<PiCheckSquare fontSize={18} />
+								<img src={CheckBoxSelect} alt="✅" />
 							)}
 							<span>{list.name}</span>
 						</label>
