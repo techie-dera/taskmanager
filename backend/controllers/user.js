@@ -47,5 +47,19 @@ const getAllUsers = async (req, res) => {
 		.sort({ _id: -1 });
 	res.status(200).send({ data: allUsers });
 };
+const updateBoard = async (req, res) => {
+	let { email } = req.body;
+	const userData = await User.findByIdAndUpdate(
+		req.user.id,
+		{ $push: { board: email } },
+		{ new: true }
+	);
+	userData.password = null;
+	res.status(200).json({
+		message: "success",
+		data: userData,
+		email: email,
+	});
+};
 
-module.exports = { getAuthUser, updateUser, getAllUsers };
+module.exports = { getAuthUser, updateUser, getAllUsers, updateBoard };
