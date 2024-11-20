@@ -8,13 +8,10 @@ import {
 	setTaskDeleteM,
 	setTaskCardM,
 	setTaskM,
+	setBoardEmail,
 } from "../redux/slices/stateSlice";
 import { AiFillDelete, AiOutlinePlus } from "react-icons/ai";
-import {
-	PiCheckSquare,
-	PiCodesandboxLogoDuotone,
-	PiSquare,
-} from "react-icons/pi";
+import { PiCodesandboxLogoDuotone } from "react-icons/pi";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { removeAuth } from "../redux/slices/authSlice";
 import useAddTask from "../hooks/useAddTask";
@@ -26,9 +23,21 @@ import { getMonthDate } from "../utils/generateDate";
 import useUpdateTask from "../hooks/useUpdateTask";
 import CheckBoxUnselect from "../assets/checkbox_unselect.png";
 import CheckBoxSelect from "../assets/checkbox_select.png";
+import useAddToBoard from "../hooks/useAddToBoard";
+import { checkValidEmail } from "../utils/validate";
 
 export const AddPeople = () => {
 	const dispatch = useDispatch();
+	const [email, setEmail] = useState("");
+	const [load, setLoad] = useState("");
+	const handleAddToBoard = (e) => {
+		const validError = checkValidEmail(email);
+		if (validError) {
+			toast.error(validError);
+			return;
+		}
+		useAddToBoard(e, setLoad, dispatch, email);
+	};
 	return (
 		<div className="model-container">
 			<div className="model-box">
@@ -38,6 +47,7 @@ export const AddPeople = () => {
 					name="email"
 					placeholder="Enter the email"
 					className="model-input"
+					onChange={(e) => setEmail(e.target.value)}
 				/>
 				<div className="model-btns">
 					<button
@@ -46,7 +56,12 @@ export const AddPeople = () => {
 					>
 						Cancel
 					</button>
-					<button className="model-submit">Add Email</button>
+					<button
+						className="model-submit"
+						onClick={(e) => handleAddToBoard(e)}
+					>
+						{load ? "Loading..." : "Add Email"}
+					</button>
 				</div>
 			</div>
 		</div>
@@ -54,14 +69,18 @@ export const AddPeople = () => {
 };
 export const AddedPeople = () => {
 	const dispatch = useDispatch();
+	const email = useSelector((store) => store.state.boardEmail);
 	return (
 		<div className="model-container">
 			<div className="model-box">
-				<h3 className="model-center">demo@demo.com added to board</h3>
+				<h3 className="model-center">{email} added to board</h3>
 				<div className="model-btns">
 					<button
 						className="model-submit"
-						onClick={() => dispatch(setAddedPeopleM(false))}
+						onClick={() => {
+							dispatch(setAddedPeopleM(false));
+							dispatch(setBoardEmail(""));
+						}}
 					>
 						Okey, got it!
 					</button>
@@ -295,7 +314,10 @@ export const TaskCard = () => {
 					<div className="checklist-box">
 						{checklist?.map((el, idx) => {
 							return (
-								<div className="checklist-input-box">
+								<div
+									className="checklist-input-box"
+									key={idx + "checklist-box"}
+								>
 									<span
 										className="checklist-btn checklist-btn-l"
 										onClick={() =>
