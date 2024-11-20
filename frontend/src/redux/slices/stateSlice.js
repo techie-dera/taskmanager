@@ -13,6 +13,7 @@ const stateSlice = createSlice({
 		taskFilterP: false,
 		taskMId: "",
 		taskM: "",
+		boardEmail: "",
 	},
 	reducers: {
 		updateDashboardSection: (state, action) => {
@@ -45,6 +46,9 @@ const stateSlice = createSlice({
 		setTaskM: (state, action) => {
 			state.taskM = action.payload;
 		},
+		setBoardEmail: (state, action) => {
+			state.boardEmail = action.payload;
+		},
 	},
 });
 export const {
@@ -58,5 +62,6 @@ export const {
 	setTaskFilterP,
 	setTaskMId,
 	setTaskM,
+	setBoardEmail,
 } = stateSlice.actions;
 export default stateSlice.reducer;
