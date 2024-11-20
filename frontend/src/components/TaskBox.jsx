@@ -44,7 +44,14 @@ const TaskBox = ({
 							?.toLowerCase()}-box`}
 					></div>
 					<p>{task?.priority}</p>
-					<div className="circle-name-box">AK</div>
+					<div className="circle-name-box">
+						{task?.userName?.name?.split(" ")[0]?.slice(0, 1) +
+							(task?.userName?.name?.split(" ")[1] == undefined
+								? ""
+								: task?.userName?.name
+										?.split(" ")[1]
+										?.slice(0, 1))}
+					</div>
 				</div>
 				<div className="relative">
 					<TbDots
