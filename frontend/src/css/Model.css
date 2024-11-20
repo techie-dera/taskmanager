@@ -95,8 +95,11 @@
 .checklist-input-box {
 	position: relative;
 }
+.model-checkbox {
+	cursor: pointer;
+}
 .model-input-btn {
-	padding: 8px 30px;
+	padding: 8px 35px;
 }
 .checklist-btn {
 	display: flex;

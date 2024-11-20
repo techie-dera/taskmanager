@@ -452,9 +452,15 @@ export const TaskCardPublic = () => {
 									>
 										<span className="checklist-btn checklist-btn-l">
 											{!list.isDone ? (
-												<PiSquare fontSize={18} />
+												<img
+													src={CheckBoxUnselect}
+													alt="⬜"
+												/>
 											) : (
-												<PiCheckSquare fontSize={18} />
+												<img
+													src={CheckBoxSelect}
+													alt="✅"
+												/>
 											)}
 										</span>
 										<p className="model-input model-input-btn">
