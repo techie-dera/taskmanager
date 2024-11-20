@@ -2,10 +2,10 @@ import { useSelector } from "react-redux";
 import TaskBox from "../components/TaskBox";
 
 const InProgress = ({ progressCollapse }) => {
-	const InProgress = useSelector((store) => store.task.InProgress);
+	const inProgress = useSelector((store) => store.task.inProgress);
 	return (
 		<div className="task-container">
-			{InProgress?.map((task, index) => (
+			{inProgress?.map((task, index) => (
 				<TaskBox
 					key={index}
 					task={task}
