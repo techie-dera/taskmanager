@@ -25,3 +25,11 @@ export const checkValidSignUpFrom = (name, email, password) => {
 		return "Needs 1 special char";
 	return null;
 };
+
+export const checkValidEmail = (email) => {
+	const isEmailValid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(
+		email
+	);
+	if (!isEmailValid) return "Invalid email format";
+	return null;
+};
