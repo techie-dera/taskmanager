@@ -204,6 +204,7 @@ export const TaskDelete = () => {
 };
 export const TaskCard = () => {
 	const task = useSelector((store) => store.state.taskM);
+	const auth = useSelector((store) => store.auth);
 
 	const dispatch = useDispatch();
 	const dueDate = useRef(task?.dueDate || null);
@@ -212,6 +213,8 @@ export const TaskCard = () => {
 	const [checklist, setChecklist] = useState(task?.checklist || []);
 	const [listBox, setListBox] = useState(task?.checklist?.length || 0);
 	const [load, setLoad] = useState("");
+	const [assignBox, setAssignBox] = useState(false);
+	const [assign, setAssign] = useState(task?.assign || "");
 
 	const handleAddTask = (e) => {
 		if (title && priority && checklist.length > 0) {
@@ -226,6 +229,7 @@ export const TaskCard = () => {
 						title,
 						priority,
 						checklist,
+						assign,
 						dueDate.current.value,
 						dispatch
 					);
@@ -236,6 +240,7 @@ export const TaskCard = () => {
 						title,
 						priority,
 						checklist,
+						assign,
 						dueDate.current.value,
 						dispatch,
 						task._id
@@ -356,17 +361,82 @@ export const TaskCard = () => {
 							</label>
 						</div>
 					</div>
-					<div className="model-assign">
-						<span>Assign to</span>
-						<input
-							type="email"
-							name="email"
-							// value={""}
-							placeholder="Add a assignee"
-							className="model-input"
-							// onChange={(e) => handleTitle(e.target.value)}
-						/>
-					</div>
+					{auth?.board?.length != 0 && (
+						<div className="model-assign">
+							<span>Assign to</span>
+							<div className="assign-model-box">
+								<div
+									className="model-input model-assign-input"
+									onClick={() => setAssignBox(true)}
+								>
+									{assign ? (
+										assign
+									) : (
+										<div className="assign-unselect-color">
+											Add a assignee
+										</div>
+									)}
+								</div>
+								<div
+									className={`assign-selection-box ${
+										assignBox &&
+										"assign-selection-box-exist"
+									}`}
+								>
+									<div>
+										<div>Don't assign to any email</div>
+										<button
+											type="button"
+											onClick={() => {
+												setAssign("");
+												setAssignBox(false);
+											}}
+										>
+											Cancel
+										</button>
+									</div>
+									{assign && (
+										<div>
+											<div>
+												Don't change to assign email
+											</div>
+											<button
+												type="button"
+												onClick={() => {
+													setAssignBox(false);
+												}}
+											>
+												Back &nbsp;
+											</button>
+										</div>
+									)}
+									{auth?.board?.map((item, idx) => {
+										return (
+											<div key={idx + "assign-box"}>
+												<div title={item}>
+													<span className="assign-circel">
+														{item
+															.split("")[0]
+															.toUpperCase()}
+													</span>{" "}
+													{item}
+												</div>
+												<button
+													type="button"
+													onClick={() => {
+														setAssign(item);
+														setAssignBox(false);
+													}}
+												>
+													Assign
+												</button>
+											</div>
+										);
+									})}
+								</div>
+							</div>
+						</div>
+					)}
 					<span className="checklist-head">
 						Checklist (
 						{checklist.filter((item) => item.isDone == true).length}
