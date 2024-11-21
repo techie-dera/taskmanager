@@ -65,7 +65,8 @@ const TaskBox = ({
 								? ""
 								: task?.userName?.name
 										?.split(" ")[1]
-										?.slice(0, 1))}
+										?.slice(0, 1)
+										.toUpperCase())}
 					</div>
 				</div>
 				<div className="relative">
