@@ -4,7 +4,11 @@ import { TbDots } from "react-icons/tb";
 import { TaskMenu } from "./PopUp";
 import { getMonthDate } from "../utils/generateDate";
 import { useDispatch } from "react-redux";
-import { setTaskMId } from "../redux/slices/stateSlice";
+import {
+	setCategoryName,
+	setTaskMId,
+	setUpdateCategoryM,
+} from "../redux/slices/stateSlice";
 import CheckBoxUnselect from "../assets/checkbox_unselect.png";
 import CheckBoxSelect from "../assets/checkbox_select.png";
 
@@ -14,7 +18,6 @@ const TaskBox = ({
 	progressCollapse,
 	doneCollapse,
 	task,
-	taskName,
 }) => {
 	const [collapse, setCollapse] = useState(true);
 	const [taskMenuP, setTaskMenuP] = useState(false);
@@ -24,6 +27,18 @@ const TaskBox = ({
 			setTaskMenuP(false);
 		}
 	};
+
+	const handleUpdateCategory = (category) => {
+		dispatch(setUpdateCategoryM(true));
+		dispatch(
+			setCategoryName({
+				newCategory: category,
+				oldCategory: task?.category,
+			})
+		);
+		dispatch(setTaskMId(task?._id));
+	};
+
 	useEffect(() => {
 		document.addEventListener("mousedown", handleClickOutside);
 		return () => {
@@ -111,7 +126,7 @@ const TaskBox = ({
 				{task?.dueDate ? (
 					<div
 						className={`task-btn task-btn-red ${
-							taskName == "done" && "task-btn-green"
+							task?.category == "done" && "task-btn-green"
 						}`}
 					>
 						{getMonthDate(task?.dueDate)}
@@ -120,16 +135,38 @@ const TaskBox = ({
 					<div></div>
 				)}
 				<div>
-					{taskName != "backlog" && (
-						<div className="task-btn">BACKLOG</div>
+					{task?.category != "backlog" && (
+						<div
+							className="task-btn"
+							onClick={() => handleUpdateCategory("backlog")}
+						>
+							BACKLOG
+						</div>
 					)}
-					{taskName != "todo" && (
-						<div className="task-btn">TO-DO</div>
+					{task?.category != "to-do" && (
+						<div
+							className="task-btn"
+							onClick={() => handleUpdateCategory("to-do")}
+						>
+							TO-DO
+						</div>
 					)}
-					{taskName != "inProgress" && (
-						<div className="task-btn">PROGRESS</div>
+					{task?.category != "in-progress" && (
+						<div
+							className="task-btn"
+							onClick={() => handleUpdateCategory("in-progress")}
+						>
+							PROGRESS
+						</div>
 					)}
-					{taskName != "done" && <div className="task-btn">DONE</div>}
+					{task?.category != "done" && (
+						<div
+							className="task-btn"
+							onClick={() => handleUpdateCategory("done")}
+						>
+							DONE
+						</div>
+					)}
 				</div>
 			</div>
 		</div>
