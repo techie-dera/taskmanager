@@ -8,9 +8,9 @@ import {
 import { setLoading } from "../redux/slices/stateSlice";
 import { toast } from "react-toastify";
 
-const useAllTaskFilter = (dispatch, filter) => {
+const useAllTaskFilter = (dispatch, days) => {
 	dispatch(setLoading(true));
-	fetch(`${import.meta.env.VITE_BACKEND_URL}/api/task/all?filter=${filter}`, {
+	fetch(`${import.meta.env.VITE_BACKEND_URL}/api/task/all?days=${days}`, {
 		method: "GET",
 		headers: getHeader(),
 	})
