@@ -10,7 +10,6 @@ const InProgress = ({ progressCollapse }) => {
 					key={index}
 					task={task}
 					progressCollapse={progressCollapse}
-					taskName={"inProgress"}
 				/>
 			))}
 		</div>

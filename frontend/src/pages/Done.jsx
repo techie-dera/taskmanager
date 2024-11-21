@@ -6,12 +6,7 @@ const Done = ({ doneCollapse }) => {
 	return (
 		<div className="task-container">
 			{done?.map((task, index) => (
-				<TaskBox
-					key={index}
-					task={task}
-					doneCollapse={doneCollapse}
-					taskName={"done"}
-				/>
+				<TaskBox key={index} task={task} doneCollapse={doneCollapse} />
 			))}
 		</div>
 	);
