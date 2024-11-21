@@ -7,10 +7,23 @@ const getTask = async (req, res) => {
 };
 
 const getAllTask = async (req, res) => {
+	const daysAgo = (days) => new Date(new Date() - days * 24 * 3600000);
 	let backlog = await Task.find({
 		$or: [
-			{ $and: [{ userName: req.user._id }, { category: "backlog" }] },
-			{ $and: [{ assign: req.user.email }, { category: "backlog" }] },
+			{
+				$and: [
+					{ userName: req.user._id },
+					{ category: "backlog" },
+					{ createdAt: { $gte: daysAgo(req.query.days || 365) } },
+				],
+			},
+			{
+				$and: [
+					{ assign: req.user.email },
+					{ category: "backlog" },
+					{ createdAt: { $gte: daysAgo(req.query.days || 365) } },
+				],
+			},
 		],
 	}).populate({
 		path: "userName",
@@ -18,8 +31,20 @@ const getAllTask = async (req, res) => {
 	});
 	let todo = await Task.find({
 		$or: [
-			{ $and: [{ userName: req.user._id }, { category: "to-do" }] },
-			{ $and: [{ assign: req.user.email }, { category: "to-do" }] },
+			{
+				$and: [
+					{ userName: req.user._id },
+					{ category: "to-do" },
+					{ createdAt: { $gte: daysAgo(req.query.days || 365) } },
+				],
+			},
+			{
+				$and: [
+					{ assign: req.user.email },
+					{ category: "to-do" },
+					{ createdAt: { $gte: daysAgo(req.query.days || 365) } },
+				],
+			},
 		],
 	}).populate({
 		path: "userName",
@@ -27,8 +52,20 @@ const getAllTask = async (req, res) => {
 	});
 	let inProgress = await Task.find({
 		$or: [
-			{ $and: [{ userName: req.user._id }, { category: "in-progress" }] },
-			{ $and: [{ assign: req.user.email }, { category: "in-progress" }] },
+			{
+				$and: [
+					{ userName: req.user._id },
+					{ category: "in-progress" },
+					{ createdAt: { $gte: daysAgo(req.query.days || 365) } },
+				],
+			},
+			{
+				$and: [
+					{ assign: req.user.email },
+					{ category: "in-progress" },
+					{ createdAt: { $gte: daysAgo(req.query.days || 365) } },
+				],
+			},
 		],
 	}).populate({
 		path: "userName",
@@ -36,8 +73,20 @@ const getAllTask = async (req, res) => {
 	});
 	let done = await Task.find({
 		$or: [
-			{ $and: [{ userName: req.user._id }, { category: "done" }] },
-			{ $and: [{ assign: req.user.email }, { category: "done" }] },
+			{
+				$and: [
+					{ userName: req.user._id },
+					{ category: "done" },
+					{ createdAt: { $gte: daysAgo(req.query.days || 365) } },
+				],
+			},
+			{
+				$and: [
+					{ assign: req.user.email },
+					{ category: "done" },
+					{ createdAt: { $gte: daysAgo(req.query.days || 365) } },
+				],
+			},
 		],
 	}).populate({
 		path: "userName",
