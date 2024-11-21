@@ -24,6 +24,7 @@ const Board = () => {
 	const [doneCollapse, setDoneCollapse] = useState(false);
 	const auth = useSelector((store) => store.auth);
 	const taskFilter = useSelector((store) => store.state.taskFilterP);
+	const taskFilterName = useSelector((store) => store.state.taskFilterName);
 	const dispatch = useDispatch();
 
 	const handleClickOutside = (event) => {
@@ -60,7 +61,7 @@ const Board = () => {
 					</div>
 					<span className="header-time relative">
 						<span onClick={() => dispatch(setTaskFilterP(true))}>
-							<p>This week</p>
+							<p>{taskFilterName}</p>
 							<IoIosArrowDown />
 						</span>
 						{taskFilter && <TaskFilter />}
