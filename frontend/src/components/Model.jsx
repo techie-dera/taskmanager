@@ -21,7 +21,7 @@ import { toast } from "react-toastify";
 import useDeleteTask from "../hooks/useDeleteTask";
 import useGetTask from "../hooks/useGetTask";
 import Loading from "./Loading";
-import { getMonthDate } from "../utils/generateDate";
+import { getMonthDate, simpleDate } from "../utils/generateDate";
 import useUpdateTask from "../hooks/useUpdateTask";
 import CheckBoxUnselect from "../assets/checkbox_unselect.png";
 import CheckBoxSelect from "../assets/checkbox_select.png";
@@ -207,7 +207,8 @@ export const TaskCard = () => {
 	const auth = useSelector((store) => store.auth);
 
 	const dispatch = useDispatch();
-	const dueDate = useRef(task?.dueDate || null);
+	const dueDateBox = useRef("");
+	const [dueDate, setDueDate] = useState(task?.dueDate || "");
 	const [title, setTitle] = useState(task?.title || "");
 	const [priority, setPriority] = useState(task?.priority || "");
 	const [checklist, setChecklist] = useState(task?.checklist || []);
@@ -230,7 +231,7 @@ export const TaskCard = () => {
 						priority,
 						checklist,
 						assign,
-						dueDate.current.value,
+						dueDate,
 						dispatch
 					);
 				} else {
@@ -241,7 +242,7 @@ export const TaskCard = () => {
 						priority,
 						checklist,
 						assign,
-						dueDate.current.value,
+						dueDate,
 						dispatch,
 						task._id
 					);
@@ -521,17 +522,21 @@ export const TaskCard = () => {
 				<div className="model-btns">
 					<label
 						htmlFor="model-card-date"
-						onClick={(e) => dueDate.current.showPicker()}
+						onClick={(e) => dueDateBox.current?.showPicker()}
 					>
 						<button className="model-due-date" type="button">
-							Select Due Date
+							{dueDate ? simpleDate(dueDate) : "Select Due Date"}
 						</button>
 					</label>
 					<input
 						type="date"
 						name="due-date"
 						id="model-card-date"
-						ref={dueDate}
+						ref={dueDateBox}
+						value={dueDate}
+						onChange={(e) => {
+							setDueDate(e.target?.value);
+						}}
 					/>
 					<button
 						type="button"
