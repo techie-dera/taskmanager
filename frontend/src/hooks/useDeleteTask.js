@@ -1,7 +1,12 @@
 import getHeader from "../utils/header";
 import { toast } from "react-toastify";
 import { setTaskDeleteM } from "../redux/slices/stateSlice";
-import { deleteTodoTask } from "../redux/slices/taskSlice";
+import {
+	deleteBacklogTask,
+	deleteDoneTask,
+	deleteInProgressTask,
+	deleteTodoTask,
+} from "../redux/slices/taskSlice";
 const useDeleteTask = (e, setLoad, dispatch, id) => {
 	setLoad("Loading...");
 	e.target.disabled = true;
@@ -15,7 +20,15 @@ const useDeleteTask = (e, setLoad, dispatch, id) => {
 			e.target.disabled = false;
 			if (json?.message === "success") {
 				toast.success("Task Deleted Successfully");
-				dispatch(deleteTodoTask(json.data));
+				if (json.data.category == "to-do") {
+					dispatch(deleteTodoTask(json.data));
+				} else if (json.data.category == "backlog") {
+					dispatch(deleteBacklogTask(json.data));
+				} else if (json.data.category == "in-progress") {
+					dispatch(deleteInProgressTask(json.data));
+				} else {
+					dispatch(deleteDoneTask(json.data));
+				}
 				dispatch(setTaskDeleteM(false));
 			} else {
 				toast.error(json?.message);
