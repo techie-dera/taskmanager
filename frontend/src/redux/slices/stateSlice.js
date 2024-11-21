@@ -14,6 +14,8 @@ const stateSlice = createSlice({
 		taskMId: "",
 		taskM: "",
 		boardEmail: "",
+		updateCategoryM: false,
+		categoryName: "",
 	},
 	reducers: {
 		updateDashboardSection: (state, action) => {
@@ -49,6 +51,12 @@ const stateSlice = createSlice({
 		setBoardEmail: (state, action) => {
 			state.boardEmail = action.payload;
 		},
+		setUpdateCategoryM: (state, action) => {
+			state.updateCategoryM = action.payload;
+		},
+		setCategoryName: (state, action) => {
+			state.categoryName = action.payload;
+		},
 	},
 });
 export const {
@@ -63,5 +71,7 @@ export const {
 	setTaskMId,
 	setTaskM,
 	setBoardEmail,
+	setUpdateCategoryM,
+	setCategoryName,
 } = stateSlice.actions;
 export default stateSlice.reducer;
