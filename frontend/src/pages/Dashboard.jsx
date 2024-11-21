@@ -11,6 +11,7 @@ import {
 	Logout,
 	TaskCard,
 	TaskDelete,
+	UpdateCategory,
 } from "../components/Model";
 
 const Dashboard = () => {
@@ -26,6 +27,7 @@ const Dashboard = () => {
 			{state.logoutM && <Logout />}
 			{state.taskDeleteM && <TaskDelete />}
 			{state.taskCardM && <TaskCard />}
+			{state.updateCategoryM && <UpdateCategory />}
 		</>
 	);
 };
