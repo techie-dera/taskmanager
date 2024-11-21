@@ -21,8 +21,17 @@ const taskSlice = createSlice({
 		setDone: (state, action) => {
 			state.done = action.payload;
 		},
+		addBacklogTask: (state, action) => {
+			state.backlog = [...state.backlog, action.payload];
+		},
 		addTodoTask: (state, action) => {
 			state.todo = [...state.todo, action.payload];
+		},
+		addInProgressTask: (state, action) => {
+			state.inProgress = [...state.inProgress, action.payload];
+		},
+		addDoneTask: (state, action) => {
+			state.done = [...state.done, action.payload];
 		},
 		updateTodoTask: (state, action) => {
 			state.todo = state.todo.map((t) =>
@@ -52,7 +61,10 @@ export const {
 	setTodo,
 	setInProgress,
 	setDone,
+	addBacklogTask,
 	addTodoTask,
+	addInProgressTask,
+	addDoneTask,
 	updateTodoTask,
 	deleteBacklogTask,
 	deleteTodoTask,
