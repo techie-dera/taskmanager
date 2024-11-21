@@ -44,6 +44,19 @@
 	height: 100%;
 	width: 100%;
 }
+.model-assign {
+	display: flex;
+	align-items: center;
+}
+.model-assign span {
+	font-size: 14px;
+	margin-right: 10px;
+	font-weight: 500;
+	text-wrap: nowrap;
+}
+.model-box span {
+	font-weight: 500;
+}
 
 .model-box-s {
 	width: fit-content;
