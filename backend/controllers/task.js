@@ -50,7 +50,7 @@ const getAllTask = async (req, res) => {
 };
 
 const addTask = async (req, res) => {
-	let { title, priority, checklist, dueDate } = req.body;
+	let { title, priority, checklist, dueDate, assign } = req.body;
 	let userName = req.user._id;
 	let newTask = new Task({
 		title,
@@ -58,9 +58,9 @@ const addTask = async (req, res) => {
 		checklist,
 		dueDate,
 		userName,
+		assign,
 	});
 	let createTask = await newTask.save();
-	console.log(createTask);
 	let task = await Task.findById(createTask._id).populate({
 		path: "userName",
 		select: "name",
@@ -69,17 +69,31 @@ const addTask = async (req, res) => {
 };
 
 const updateTask = async (req, res) => {
-	let { title, priority, checklist, dueDate } = req.body;
+	let { title, priority, checklist, dueDate, assign } = req.body;
 	const { id } = req.params;
+	let oldTask = await Task.findById(id);
 	let updatedTask = await Task.findByIdAndUpdate(
 		id,
-		{ title, priority, checklist, dueDate },
+		{ title, priority, checklist, dueDate, assign },
 		{ new: true }
 	).populate({
 		path: "userName",
 		select: "name",
 	});
-	res.status(200).send({ message: "success", data: updatedTask });
+	if (
+		(assign == "" && oldTask.assign == req.user.email) ||
+		(assign != "" &&
+			assign != req.user.email &&
+			updatedTask.userName._id.toString() != req.user._id.toString())
+	) {
+		res.status(200).send({
+			message: "success",
+			data: updatedTask,
+			removeAssignCategory: oldTask.category,
+		});
+	} else {
+		res.status(200).send({ message: "success", data: updatedTask });
+	}
 };
 const deleteTask = async (req, res) => {
 	const { id } = req.params;
