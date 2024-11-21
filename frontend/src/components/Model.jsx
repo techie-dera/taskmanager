@@ -9,6 +9,8 @@ import {
 	setTaskCardM,
 	setTaskM,
 	setBoardEmail,
+	setCategoryName,
+	setUpdateCategoryM,
 } from "../redux/slices/stateSlice";
 import { AiFillDelete, AiOutlinePlus } from "react-icons/ai";
 import { PiCodesandboxLogoDuotone } from "react-icons/pi";
@@ -25,6 +27,7 @@ import CheckBoxUnselect from "../assets/checkbox_unselect.png";
 import CheckBoxSelect from "../assets/checkbox_select.png";
 import useAddToBoard from "../hooks/useAddToBoard";
 import { checkValidEmail } from "../utils/validate";
+import useUpdateCategory from "../hooks/useUpdateCategory";
 
 export const AddPeople = () => {
 	const dispatch = useDispatch();
@@ -83,6 +86,53 @@ export const AddedPeople = () => {
 						}}
 					>
 						Okey, got it!
+					</button>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export const UpdateCategory = () => {
+	const dispatch = useDispatch();
+	const [load, setLoad] = useState("");
+	const { oldCategory, newCategory } = useSelector(
+		(store) => store.state.categoryName
+	);
+	const taskId = useSelector((store) => store.state.taskMId);
+	const handleUpdateCategory = (e) => {
+		useUpdateCategory(
+			e,
+			setLoad,
+			dispatch,
+			taskId,
+			newCategory,
+			oldCategory
+		);
+	};
+	return (
+		<div className="model-container">
+			<div className="model-box model-box-s">
+				<h3 className="model-center">
+					Change the status of task (
+					{newCategory.charAt(0).toUpperCase() + newCategory.slice(1)}
+					)
+				</h3>
+				<div className="model-btns">
+					<button
+						className="model-submit"
+						onClick={(e) => handleUpdateCategory(e)}
+					>
+						{load ? "Loading..." : "Update status"}
+					</button>
+					<button
+						className="model-cancel"
+						onClick={() => {
+							dispatch(setUpdateCategoryM(false));
+							dispatch(setCategoryName(""));
+						}}
+					>
+						Cancel
 					</button>
 				</div>
 			</div>
@@ -305,6 +355,17 @@ export const TaskCard = () => {
 								<span>Low Priority</span>
 							</label>
 						</div>
+					</div>
+					<div className="model-assign">
+						<span>Assign to</span>
+						<input
+							type="email"
+							name="email"
+							// value={""}
+							placeholder="Add a assignee"
+							className="model-input"
+							// onChange={(e) => handleTitle(e.target.value)}
+						/>
 					</div>
 					<span className="checklist-head">
 						Checklist (
