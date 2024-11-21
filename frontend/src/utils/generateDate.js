@@ -10,3 +10,12 @@ export const generateDate = () => {
 export const getMonthDate = (date) => {
 	return new Date(date).toDateString().split(" ").splice(1, 2).join(" ");
 };
+
+// simple date formate MM/DD/YYYY
+export const simpleDate = (date) => {
+	return new Date(date)
+		.toLocaleDateString()
+		.split("/")
+		.splice(1)
+		.join("/" + new Date(date).getDate() + "/");
+};
