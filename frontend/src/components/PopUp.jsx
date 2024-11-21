@@ -50,16 +50,16 @@ export const TaskMenu = ({ setTaskMenuP, id, task }) => {
 };
 export const TaskFilter = () => {
 	const dispatch = useDispatch();
-	const handleFilter = (filter) => {
+	const handleFilter = (days) => {
 		dispatch(setTaskFilterP(false));
-		useAllTaskFilter(dispatch, filter);
+		useAllTaskFilter(dispatch, days);
 	};
 
 	return (
 		<div className="popup-box pupup-filter">
 			<button
 				onClick={() => {
-					handleFilter("today");
+					handleFilter(1);
 					dispatch(setTaskFilterName("Today"));
 				}}
 			>
@@ -67,7 +67,7 @@ export const TaskFilter = () => {
 			</button>
 			<button
 				onClick={() => {
-					handleFilter("this-week");
+					handleFilter(7);
 					dispatch(setTaskFilterName("This week"));
 				}}
 			>
@@ -75,7 +75,7 @@ export const TaskFilter = () => {
 			</button>
 			<button
 				onClick={() => {
-					handleFilter("this-month");
+					handleFilter(30);
 					dispatch(setTaskFilterName("This month"));
 				}}
 			>
