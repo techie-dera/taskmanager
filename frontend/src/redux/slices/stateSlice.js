@@ -11,6 +11,7 @@ const stateSlice = createSlice({
 		taskDeleteM: false,
 		taskCardM: false,
 		taskFilterP: false,
+		taskFilterName: "This week",
 		taskMId: "",
 		taskM: "",
 		boardEmail: "",
@@ -42,6 +43,9 @@ const stateSlice = createSlice({
 		setTaskFilterP: (state, action) => {
 			state.taskFilterP = action.payload;
 		},
+		setTaskFilterName: (state, action) => {
+			state.taskFilterName = action.payload;
+		},
 		setTaskMId: (state, action) => {
 			state.taskMId = action.payload;
 		},
@@ -68,6 +72,7 @@ export const {
 	setTaskDeleteM,
 	setTaskCardM,
 	setTaskFilterP,
+	setTaskFilterName,
 	setTaskMId,
 	setTaskM,
 	setBoardEmail,
