@@ -32,6 +32,9 @@
 	justify-content: space-between;
 	font-size: 16px;
 }
+.assign-unselect-color {
+	color: gray;
+}
 .model-task-null {
 	align-items: center;
 }
@@ -78,24 +81,32 @@
 	padding-right: 5px;
 }
 
-.checklist-box::-webkit-scrollbar {
+.checklist-box::-webkit-scrollbar,
+.assign-selection-box::-webkit-scrollbar {
 	width: 8px;
 }
 
-.checklist-box::-webkit-scrollbar-thumb {
+.checklist-box::-webkit-scrollbar-thumb,
+.assign-selection-box::-webkit-scrollbar-thumb {
 	background: #8daab9cc;
 	cursor: grab;
 	border-radius: 4px;
 }
 
-.checklist-box::-webkit-scrollbar-thumb:active {
+.checklist-box::-webkit-scrollbar-thumb:active,
+.assign-selection-box::-webkit-scrollbar-thumb:active {
 	cursor: grabbing;
 }
 
-.checklist-box::-webkit-scrollbar-track {
+.checklist-box::-webkit-scrollbar-track,
+.assign-selection-box::-webkit-scrollbar-track {
 	background: #d6eaf4;
 }
 
+.assign-model-box {
+	width: 100%;
+	position: relative;
+}
 .model-input {
 	width: 100%;
 	padding: 8px 10px;
@@ -105,6 +116,67 @@
 	font-size: 16px;
 	margin: 6px 0px;
 }
+.model-assign-input {
+	cursor: pointer;
+}
+.assign-selection-box {
+	position: absolute;
+	width: 100%;
+	background-color: #fff;
+	top: 100%;
+	left: 0px;
+	border-radius: 5px;
+	z-index: 99;
+	display: flex;
+	gap: 20px;
+	flex-direction: column;
+	height: 0px;
+	overflow-y: scroll;
+	transition: all 0.1s ease;
+	padding: 0px 10px;
+}
+.assign-selection-box-exist {
+	height: fit-content;
+	max-height: 30vh;
+	padding: 8px 10px;
+	border: 1px solid #ccc;
+}
+
+.assign-selection-box > div {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+.assign-selection-box > div > div {
+	display: flex;
+	align-items: center;
+	width: calc(100% - 140px);
+	overflow: hidden;
+}
+.assign-selection-box button {
+	width: fit-content;
+	padding: 4px 40px;
+	border-radius: 10px;
+	cursor: pointer;
+	font-weight: 500;
+	border: 1px solid #ccc;
+	color: gray;
+}
+.assign-selection-box span {
+	font-weight: 500;
+}
+.assign-circel {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 40px;
+	min-width: 40px;
+	border-radius: 50%;
+	background-color: #ffebeb;
+	margin-right: 5px;
+}
+
 .checklist-input-box {
 	position: relative;
 }
