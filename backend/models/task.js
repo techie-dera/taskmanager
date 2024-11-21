@@ -36,12 +36,8 @@ const taskSchema = new mongoose.Schema(
 			ref: "User",
 			required: true,
 		},
-		assign: [
-			{
-				type: String,
-				trim: true,
-			},
-		],
+		assign: String,
+
 		dueDate: Date,
 	},
 	{
