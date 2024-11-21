@@ -10,8 +10,10 @@ const authorization = wrapAsync(async (req, res, next) => {
 	const userId = getUserIdFromToken(token);
 	if (userId) {
 		req.user = await User.findById(userId).select("-password");
+		next();
+	} else {
+		return res.status(404).send({ message: "Something went wrong" });
 	}
-	next();
 });
 
 module.exports = { authorization };
