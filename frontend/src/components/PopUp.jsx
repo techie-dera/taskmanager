@@ -4,9 +4,12 @@ import { useDispatch } from "react-redux";
 import {
 	setTaskCardM,
 	setTaskDeleteM,
+	setTaskFilterName,
+	setTaskFilterP,
 	setTaskM,
 } from "../redux/slices/stateSlice";
 import { toast } from "react-toastify";
+import useAllTaskFilter from "../hooks/useAllTaskFilter";
 
 export const TaskMenu = ({ setTaskMenuP, id, task }) => {
 	const dispatch = useDispatch();
@@ -46,11 +49,38 @@ export const TaskMenu = ({ setTaskMenuP, id, task }) => {
 	);
 };
 export const TaskFilter = () => {
+	const dispatch = useDispatch();
+	const handleFilter = (filter) => {
+		dispatch(setTaskFilterP(false));
+		useAllTaskFilter(dispatch, filter);
+	};
+
 	return (
 		<div className="popup-box pupup-filter">
-			<button>Today</button>
-			<button>This Week</button>
-			<button>This Month</button>
+			<button
+				onClick={() => {
+					handleFilter("today");
+					dispatch(setTaskFilterName("Today"));
+				}}
+			>
+				Today
+			</button>
+			<button
+				onClick={() => {
+					handleFilter("this-week");
+					dispatch(setTaskFilterName("This week"));
+				}}
+			>
+				This Week
+			</button>
+			<button
+				onClick={() => {
+					handleFilter("this-month");
+					dispatch(setTaskFilterName("This month"));
+				}}
+			>
+				This Month
+			</button>
 		</div>
 	);
 };
