@@ -87,4 +87,29 @@ const deleteTask = async (req, res) => {
 	res.status(200).send({ message: "success", data: deleteTask });
 };
 
-module.exports = { getTask, getAllTask, addTask, updateTask, deleteTask };
+const updateCategory = async (req, res) => {
+	const { id } = req.params;
+	const { category } = req.body;
+	let task = await Task.findByIdAndUpdate(
+		id,
+		{ category: category },
+		{ new: true }
+	).populate({
+		path: "userName",
+		select: "name",
+	});
+
+	res.status(200).send({
+		message: "success",
+		data: task,
+	});
+};
+
+module.exports = {
+	getTask,
+	getAllTask,
+	addTask,
+	updateTask,
+	deleteTask,
+	updateCategory,
+};
