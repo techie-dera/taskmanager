@@ -1,13 +1,20 @@
 import getHeader from "../utils/header";
 import { toast } from "react-toastify";
 import { setTaskCardM, setTaskM } from "../redux/slices/stateSlice";
-import { updateTodoTask } from "../redux/slices/taskSlice";
+import {
+	deleteBacklogTask,
+	deleteDoneTask,
+	deleteInProgressTask,
+	deleteTodoTask,
+	updateTodoTask,
+} from "../redux/slices/taskSlice";
 const useUpdateTask = (
 	e,
 	setLoad,
 	title,
 	priority,
 	checklist,
+	assign,
 	dueDate,
 	dispatch,
 	id
@@ -21,6 +28,7 @@ const useUpdateTask = (
 			title: title,
 			priority: priority,
 			checklist: checklist,
+			assign: assign,
 			dueDate: dueDate,
 		}),
 	})
@@ -30,7 +38,17 @@ const useUpdateTask = (
 			e.target.disabled = false;
 			if (json?.message === "success") {
 				toast.success("Task Updated Successfully");
-				dispatch(updateTodoTask(json.data));
+				if (json?.removeAssignCategory == "to-do") {
+					dispatch(deleteTodoTask(json.data));
+				} else if (json?.removeAssignCategory == "in-progress") {
+					dispatch(deleteInProgressTask(json.data));
+				} else if (json?.removeAssignCategory == "backlog") {
+					dispatch(deleteBacklogTask(json.data));
+				} else if (json?.removeAssignCategory == "done") {
+					dispatch(deleteDoneTask(json.data));
+				} else {
+					dispatch(updateTodoTask(json.data));
+				}
 				dispatch(setTaskCardM(false));
 				dispatch(setTaskM(""));
 			} else {

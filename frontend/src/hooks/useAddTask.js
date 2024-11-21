@@ -8,6 +8,7 @@ const useAddTask = (
 	title,
 	priority,
 	checklist,
+	assign,
 	dueDate,
 	dispatch
 ) => {
@@ -20,6 +21,7 @@ const useAddTask = (
 			title: title,
 			priority: priority,
 			checklist: checklist,
+			assign: assign,
 			dueDate: dueDate,
 		}),
 	})
