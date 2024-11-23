@@ -11,7 +11,7 @@ const stateSlice = createSlice({
 		taskDeleteM: false,
 		taskCardM: false,
 		taskFilterP: false,
-		taskFilterName: "This week",
+		taskFilterName: "This month",
 		taskMId: "",
 		taskM: "",
 		boardEmail: "",
