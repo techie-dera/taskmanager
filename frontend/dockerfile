@@ -1,0 +1,15 @@
+# Build stage
+FROM node:18 AS build
+
+WORKDIR /app
+COPY . .
+RUN npm install
+RUN npm run build
+
+# Serve with Nginx
+FROM nginx:alpine
+
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Optional: remove default Nginx config and add your own if needed
+EXPOSE 8080
