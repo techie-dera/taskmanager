@@ -29,5 +29,5 @@ jobs:
             # clone git repository
             cd taskmanager
             git pull 
-            docker compose up -d --no-deps --build --force-recreate --remove-orphans
+            docker-compose up -d --no-deps --build --force-recreate --remove-orphans
           EOF
